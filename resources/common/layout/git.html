@@ -1,0 +1,28 @@
+<html
+>
+  <head>
+    <meta charset="utf-8" />
+    <link 
+    rel="preload" 
+    href="{{_res_path}}/common/font/NotoColorEmoji-Regular.ttf" 
+    as="font" 
+    type="font/woff"
+    />
+    <link
+      href="{{_res_path}}/common/css/github-light.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <meta name="viewport" content="width=device-width" />
+    {{block 'css'}} {{/block}}
+    {{block 'scripts'}} {{/block}}
+  </head>
+
+  <body>
+    <div class="application-main">
+      <div>
+        <main>{{block 'main'}}{{/block}}</main>
+      </div>
+    </div>
+  </body>
+</html>
