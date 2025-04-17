@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url("../font/NotoColorEmoji-Regular.ttf") format('truetype');
+}
+body {
+  background: rgba(255, 255, 255);
+  margin: 0;
+  padding: 40px 20px;
+  width: 1200px;
+}

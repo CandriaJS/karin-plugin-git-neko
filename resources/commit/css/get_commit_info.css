@@ -1,0 +1,175 @@
+body {
+ width: 100%; 
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  padding: 40px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+.card .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card .header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+}
+
+.commit-card {
+  width: 100%;
+}
+
+.repo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.repo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.branch-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.platform-icon img {
+  width: 34px;
+  height: 34px;
+}
+
+.repo-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.repo-visibility {
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center; 
+  margin-left: 5px;
+  padding: 5px 20px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  height: 36px;
+  line-height: 1;
+}
+
+.repo-visibility.public {
+  background-color: #e6f7e6;
+  color: #2c974b;
+  border: 1px solid #2c974b;
+}
+
+.repo-visibility.private {
+  background-color: #ffebeb;
+  color: #cb2431;
+  border: 1px solid #cb2431;
+}
+
+.branch-icon img{
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.author-info {
+  background-color: rgba(130, 228, 235, 0.8);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.time-info {
+  color: #666;
+  font-size: 14px;
+  margin-left: auto;
+  padding-left: 10px;
+}
+
+.commit-icon img{
+  width: 30px;
+  height: 30px;
+}
+
+.commit-message {
+  margin-top: 10px;
+  background-color: rgba(197, 196, 243, 0.8);
+  border-radius: 8px;
+  padding: 10px;
+  border-left: 4px solid rgb(50, 173, 230);
+}
+
+.commit-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-changes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.changes-added {
+  color: rgb(48, 130, 31);
+}
+
+.changes-deleted {
+  color: rgb(249, 60, 50);
+}
+
+.changes-divider {
+  color: rgba(132, 141, 151); 
+}
+
+.commit-icon {
+  display: inline-flex;
+}
+
+.commit-divider {
+  height: 1px;
+  background-color: rgb(34, 34, 34);
+  width: 100%;
+  margin-top: 10px;
+}
+
+.commit-content {
+  padding: 12px;
+  white-space: pre-line;
+}

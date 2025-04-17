@@ -1,0 +1,92 @@
+{{extend gitLayout}}
+{{block 'css'}}
+<link 
+href="{{_res_path}}/repo/css/get_repo_info.css" 
+rel="stylesheet" 
+type="text/css" 
+/>
+<link
+href="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.css"
+rel="stylesheet"
+type="text/css"
+/>
+{{/block}}
+{{block 'scripts'}}
+<script src="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.js"></script>
+<script src="{{_res_path}}/repo/js/language-colors.js"></script>
+{{/block}}
+{{block 'main'}}
+
+<div class="card">
+  <div class="header">
+    {{if type === 'github'}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{else if type === 'gitee'}}
+    <img src="{{_res_path}}/common/images/icon/Gitee.svg" alt="Gitee Logo">
+    {{else if type === 'gitcode'}}
+    <img src="{{_res_path}}/common/images/icon/Gitcode.svg" alt="Gitcode Logo">
+    {{else}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{/if}}
+
+    {{if type === 'github'}}
+    <h2>GitHub 仓库信息</h2>
+    {{else if type === 'gitee'}}
+    <h2>Gitee 仓库信息</h2>
+    {{else if type === 'gitcode'}}
+    <h2>GitCode 仓库信息</h2>
+    {{else}}
+    <h2>GitHub 仓库信息</h2>
+    {{/if}}
+
+  </div>
+
+  <div class="info-section">
+    <div class="info-label">仓库拥有者：</div>
+    <div class="info-value">{{ owner }}</div>
+
+    <div class="info-label">仓库名称：</div>
+    <div class="info-value">{{ repo }}</div>
+
+    <div class="info-label">仓库状态：</div>
+    <div class="info-value">
+      <span class="repo-visibility {{visibility ? 'private' : 'public'}}">
+        {{visibility ? '私有' : '公开'}}
+      </span>
+    </div>
+
+    <div class="info-label">仓库语言：</div>
+    <div class="info-value">
+      <span class="repo-language">{{ language }}</span>
+    </div>
+
+    <div class="info-label">仓库描述：</div>
+    <div class="info-value">{{ description }}</div>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="info-section">
+    <div class="info-label">仓库地址：</div>
+    <div class="info-value"><a class="link" href="{{ url }}" target="_blank">{{ url }}</a></div>
+
+    <div class="info-label">创建时间：</div>
+    <div class="info-value">{{ created_at }}</div>
+
+    <div class="info-label">更新时间：</div>
+    <div class="info-value">{{ updated_at }}</div>
+
+    <div class="info-label">最后推送时间：</div>
+    <div class="info-value">{{ pushed_at }}</div>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="footer-stats">
+    <div><span>⭐</span> Star: {{ star_count }}</div>
+    <div><span>🔁</span> Fork: {{ fork_count }}</div>
+    <div><span>❗</span> Issue And Pr: {{ issue_count }}</div>
+  </div>
+</div>
+  
+{{/block}}

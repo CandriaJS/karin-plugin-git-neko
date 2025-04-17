@@ -1,0 +1,245 @@
+.card {
+  background-color: rgba(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  padding: 40px 60px;
+  margin: 20px auto;
+  transition: transform 0.3s ease;
+}
+.card .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.card .header img {
+  width: 35px;
+  height: 35px;
+}
+
+.card .header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #222;
+}
+
+.emoji {
+  font-family: 'Noto Color Emoji', sans-serif; 
+}
+
+.user-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 30px;
+}
+
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(238, 238, 238);
+  flex-shrink: 0;
+  margin-top: -10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  margin: 0;
+}
+
+.user-info h1 {
+  margin: 5px 0;
+  font-size: 28px;
+  color: rgb(51, 51, 51);
+}
+
+.user-info .username {
+  margin: 5px 0;
+  font-size: 18px;
+  color: rgba(102, 102, 102);
+}
+
+.user-info .website {
+  margin: 5px 0;
+}
+
+.user-info .website a {
+  text-decoration: none;
+  font-size: 16px;
+  color: rgba(102, 102, 102)
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(117, 117, 117);
+  width: 100%;
+}
+
+.info-section h2 {
+  font-size: 16px;
+  color: rgba(159, 168, 218);
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.grid-row {
+  display: flex;
+  gap: 30px;
+}
+
+.grid-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.grid-item span {
+  color: rgb(102, 102, 102);
+  margin-right: 8px;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.stat-container {
+  flex: 1;
+  min-width: calc(25% - 15px);
+  background-color: rgba(245, 245, 245);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h3 {
+  margin: 0;
+  font-size: 24px;
+  color: rgb(51, 51, 51);
+}
+
+.stat p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: rgb(102, 102, 102);
+}
+
+.wrap-text {
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.user-info h1,
+.user-info .username,
+.user-info .bio {
+  word-break: break-word;
+  white-space: normal;
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 5px;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.contribution-months {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-around;
+  font-size: 15px; 
+  margin-bottom: 5px;
+  width: 100%;
+  padding-left: 2px;
+}
+
+.contribution-month {
+  min-width: 14px;
+  text-align: center;
+  margin-right: -1px;
+}
+
+.contribution-weeks {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  padding-right: 5px;
+  text-align: right;
+  height: 97px;
+}
+
+.contribution-week {
+  font-size: 11px;
+  line-height: 14px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  height: 16px;
+}
+
+.contribution-tiles {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 13px);
+  gap: 5px;
+  width: 100%;
+  padding: 0;
+  align-items: start;
+}
+
+.contribution-tile {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  outline: 1px solid rgba(27, 35, 36, 0.06);
+  outline-offset: -1px;
+}
+
+.contribution-tile[data-level="0"] { background: #EBEDF0; }
+.contribution-tile[data-level="1"] { background: #9be9a8; }
+.contribution-tile[data-level="2"] { background: #40C463; }
+.contribution-tile[data-level="3"] { background: #30a14e; }
+.contribution-tile[data-level="4"] { background: #216e39; }
+
+.contribution-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.contribution-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

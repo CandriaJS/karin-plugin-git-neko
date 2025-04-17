@@ -1,0 +1,12 @@
+# 代理配置
+# 通用代理
+common:
+
+# HTTP 代理
+http:
+
+# HTTPS 代理
+https:
+
+# SOCKS5 代理
+socks5:

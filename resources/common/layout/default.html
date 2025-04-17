@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="#" />
+    <link rel="preload" href="{{_res_path}}/common/font/HYWH.woff" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="preload" href="{{_res_path}}/common/font/NZBZ.woff" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="preload" href="{{_res_path}}/common/font/TTTGB-Number.woff" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="preload" href="{{_res_path}}/common/font/HELVETI.woff" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="{{_res_path}}/common/css/common.css" />
+    <title>{{_Plugin_AliasName}}</title>
+    {{block 'css'}} {{/block}}
+  </head>
+
+  <body {{@sys.scale}}>
+    <div class="container" id="container">
+      {{block 'main'}}{{/block}}
+      <div class="copyright">{{@copyright}}</div>
+    </div>
+  </body>
+</html>
