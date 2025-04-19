@@ -9,12 +9,9 @@ export const get_repo_info = karin.command(
   async (e: Message) => {
     try {
       const match = e.msg.match(get_repo_info.reg)
-      if (!match) {
-        throw new Error('喵呜~ 请输入要查询的仓库名')
-      }
-      const [, owner, repo] = match
+      const [, owner, repo] = match!
       const token = await utils.get_user_token(e.userId)
-      const gh = github.get_github(token ?? undefined)
+      const gh = github.get_github(token)
       const repo_obj = await gh.get_repo()
       const repo_info = await repo_obj.get_repo_info({ owner, repo })
       const img = await Render.render(
@@ -45,14 +42,13 @@ export const get_repo_info = karin.command(
   }
 )
 export const get_org_repos_list = karin.command(
-  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:组织|org)(?:仓库|repo)(?:列表|list)\s*(.+)?/i,
+  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:组织|org)(?:仓库|repo)(?:列表|list)\s*(.+)/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_org_repos_list.reg)
-      if (!match) throw new Error('喵呜~ 请输入要查询的组织名')
-      const [, org] = match
+      const [, org] = match!
       const token = await utils.get_user_token(e.userId)
-      const gh = github.get_github(token ?? undefined)
+      const gh = github.get_github(token)
       const repo = await gh.get_repo()
       const org_repos_list = await repo.get_org_repos_list({ org })
       const repo_list = org_repos_list.data.map(repo => ({
@@ -83,17 +79,16 @@ export const get_org_repos_list = karin.command(
   })
 
 export const get_user_repos_list = karin.command(
-  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:用户|org)(?:仓库|repo)(?:列表|list)\s*(.*)/i,
+  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:用户|org)(?:仓库|repo)(?:列表|list)\s*(.+)?/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_user_repos_list.reg)
-      const username = match?.[1]
-      console.log(username)
+      const [, username] = match!
       const token = await utils.get_user_token(e.userId)
-      const gh = github.get_github(token ?? undefined)
+      const gh = github.get_github(token)
       const repo = await gh.get_repo()
       let user_repos_list
-      if (!username) {
+      if (!username?.trim()) {
         if (!token) throw new Error('喵呜~ 请先进行应用安装然后进行授权安装')
         user_repos_list = await repo.get_user_repos_list_by_token({ type: 'owner' })
       } else {
@@ -119,4 +114,9 @@ export const get_user_repos_list = karin.command(
       logger.error(error)
       await e.reply(`[${Version.Plugin_AliasName}]: ${(error as Error).message}`)
     }
+  }, {
+    name: '清语Git插件:用户仓库列表',
+    priority: -Infinity,
+    event: 'message',
+    permission: 'all'
   })

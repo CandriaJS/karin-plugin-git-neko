@@ -5,24 +5,23 @@ import { github, utils } from '@/models'
 import { Version } from '@/root'
 
 export const get_user_info = karin.command(
-  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:用户|user)(?:信息|info)\s*(.*)/i,
+  /^#?(?:(?:清语)?Git插件|git-plugin)?GitHub(?:用户|user)(?:信息|info)\s*(.+)?/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_user_info.reg)
-      if (!match) throw new Error('喵呜~ 请输入要查询的用户名')
-      let [, name] = match
+      const [, name] = match!
       const token = await utils.get_user_token(e.userId) as string
       const gh = github.get_github(token)
       const user = await gh.get_user()
       let user_info
-      if (!name) {
+      if (!name?.trim()) {
         if (!token) throw new Error('喵呜~ 请先进行应用安装然后进行授权安装')
         user_info = await user.get_user_info_by_token()
       } else {
         user_info = await user.get_user_info({ username: name })
       }
-      name = user_info.data.login
-      const contribution = await user.get_user_contribution({ username: name })
+      const username = user_info.data.login
+      const contribution = await user.get_user_contribution({ username })
       const img = await Render.render(
         'user/get_user_info',
         {

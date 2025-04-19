@@ -10,7 +10,7 @@ type Model = dbType['subscription']
  * @param {string} [token] - 用户的token
  * @returns Github 实例, 可选是否带Token的实例
  */
-export function get_github (token?: string): github.Base {
+export function get_github (token?: string | null): github.Base {
   if (
     !(Config.github.APPID ||
       Config.github.PrivateKey ||
