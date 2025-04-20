@@ -30,7 +30,7 @@
     "@types/markdown-it": "^14.1.2",
     "body-parser": "^2.2.0",
     "express-art-template": "^1.0.1",
-    "git-neko-kit": "https://pkg.pr.new/git-neko-kit@bebe6f7",
+    "git-neko-kit": "https://pkg.pr.new/git-neko-kit@4d290d6",
     "markdown-it": "^14.1.0",
     "sequelize": "^6.37.7"
   },

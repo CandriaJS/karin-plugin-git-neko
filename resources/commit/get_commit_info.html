@@ -9,13 +9,13 @@
 <div class="card">
   <div class="header">
     {{if platform === 'github'}}
-    <h2>GitHub 更新推送</h2>
+    <h2>GitHub {{ title }}</h2>
     {{else if platform === 'gitee'}}
-    <h2>Gitee 更新推送</h2>
+    <h2>Gitee {{ title }}</h2>
     {{else if platform === 'gitcode'}}
-    <h2>GitCode 更新推送</h2>
+    <h2>GitCode {{ title }}</h2>
     {{else}}
-    <h2>GitHub 更新推送</h2>
+    <h2>GitHub {{ title }}</h2>
     {{/if}}
   </div>
 

@@ -79,7 +79,7 @@ pnpm install --filter=karin-plugin-git-neko
 ## 文档
 ***初次使用请务必查看文档**
 
-- [文档](https://docs.wuliya.cn/clarity/git-neko-plugin)
+- [文档](https://docs.wuliya.cn/clarity/git-neko)
 
 ## 更新计划 🛠
 

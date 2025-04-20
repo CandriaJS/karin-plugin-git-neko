@@ -51,3 +51,29 @@ export const get_issue_info = karin.command(
     event: 'message',
     permission: 'all'
   })
+
+export const create_issue = karin.command(
+  /^#?(?:(?:清语)?Git插件|git-neko-plugin)?GitHub(?:议题|issue)(?:创建|create)\s*([\w-]+)[\/\s]+([\w-]+)\s+(.+)/i,
+  async (e: Message) => {
+    try {
+      const match = e.msg.match(create_issue.reg)
+      const [, owner, repo, title] = match!
+      const token = await utils.get_user_token(e.userId)
+      const gh = github.get_github(token)
+      await e.reply('请输入Issue内容, 输入"无"表示不输入内容')
+      const context = await karin.ctx(e)
+      const issue = await gh.get_issue()
+      let body: string | null = context.msg.trim()
+      if (context.msg.trim() === '无') {
+        body = null
+      }
+      const issue_info = await issue.create_issue({ owner, repo, title, body })
+      await e.reply(`[${Version.Plugin_AliasName}]: Issue创建成功, Issue链接: ${issue_info.data.html_url}`)
+    } catch (error) {
+    }
+  }, {
+    name: '清语Git插件:议题创建',
+    priority: -Infinity,
+    event: 'message',
+    permission: 'all'
+  })
