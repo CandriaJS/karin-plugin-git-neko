@@ -1,0 +1,64 @@
+{{extend gitLayout}}
+{{block 'css'}}
+<link 
+href="{{_res_path}}/repo/css/get_user_repos_list.css" 
+rel="stylesheet" 
+type="text/css" 
+/>
+<link
+href="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.css"
+rel="stylesheet"
+type="text/css"
+/>
+
+{{/block}}
+
+{{block 'scripts'}}
+<script src="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.js"></script>
+<script src="{{_res_path}}/repo/js/language-colors.js"></script>
+{{/block}}
+{{block 'main'}}
+
+<div class="card">
+  <div class="header">
+    {{if platform === 'github'}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{else if platform === 'gitee'}}
+    <img src="{{_res_path}}/common/images/icon/Gitee.svg" alt="Gitee Logo">
+    {{else if platform === 'gitcode'}}
+    <img src="{{_res_path}}/common/images/icon/Gitcode.svg" alt="Gitcode Logo">
+    {{else}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{/if}}
+
+    {{if platform === 'github'}}
+    <h2>GitHub 用户仓库列表</h2>
+    {{else if platform === 'gitee'}}
+    <h2>Gitee 用户仓库列表</h2>
+    {{else if platform === 'gitcode'}}
+    <h2>GitCode 用户仓库列表</h2>
+    {{else}}
+    <h2>GitHub 用户仓库列表</h2>
+    {{/if}}
+
+  </div>
+
+  <div class="repo-list">
+    {{each repo_list repo}}
+    <div class="repo-item">
+      <span class="repo-name">{{repo.name}}</span>
+      <span class="repo-visibility {{repo.visibility ? 'private' : 'public'}}">
+        {{repo.visibility ? '私有' : '公开'}}
+      </span>
+      <div class="repo-meta">
+        <span class="repo-language">{{repo.language}}</span>
+        <span class="repo-stars">⭐{{repo.star_count}}</span>
+        <span class="repo-pushed">最后推送时间: {{repo.pushed_at}}</span>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+</div>
+  
+{{/block}}

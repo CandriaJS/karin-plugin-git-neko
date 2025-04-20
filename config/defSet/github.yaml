@@ -1,0 +1,11 @@
+# GitHub 配置
+# Github Apps 的APPID
+APPID:
+# Github Apps 的PrivateKey
+PrivateKey:
+# Github Apps 的ClientID
+ClientID:
+# Github Apps 的ClientSecret
+ClientSecret:
+# GitHub Apps 的WebhookSecret
+WebhookSecret:

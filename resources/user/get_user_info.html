@@ -1,0 +1,142 @@
+{{extend gitLayout}}
+{{block 'css'}}
+<link 
+href="{{_res_path}}/user/css/get_user_info.css" 
+rel="stylesheet" 
+type="text/css" 
+/>
+{{/block}}
+{{block 'main'}}
+
+<div class="card">
+  <div class="header">
+    {{if platform === 'github'}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{else if platform === 'gitee'}}
+    <img src="{{_res_path}}/common/images/icon/Gitee.svg" alt="Gitee Logo">
+    {{else if platform === 'gitcode'}}
+    <img src="{{_res_path}}/common/images/icon/Gitcode.svg" alt="Gitcode Logo">
+    {{else}}
+    <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
+    {{/if}}
+
+    {{if platform === 'github'}}
+    <h2>GitHub 用户信息</h2>
+    {{else if platform === 'gitee'}}
+    <h2>Gitee 用户信息</h2>
+    {{else if platform === 'gitcode'}}
+    <h2>GitCode 用户信息</h2>
+    {{else}}
+    <h2>GitHub 用户信息</h2>
+    {{/if}}
+
+  </div>
+
+  <div class="user-profile">
+    <img class="user-avatar" src="{{ avatar }}" alt="用户头像">
+    <div class="user-info">
+      <h1>{{ name }}</h1>
+      <p class="username">@{{ username }}</p>
+      {{if bio }}
+      <p class="bio">简介: {{ bio }}</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info-section">
+    <h2 class="emoji">📄 基本资料</h2>
+    <div class="info-grid">
+      <div class="grid-row">
+        <div class="grid-item"><span class="emoji">📧 邮箱：</span><span class="wrap-text">{{ email }}</span></div>
+        <div class="grid-item"><span class="emoji">🏢 公司：</span><span class="wrap-text">{{ company }}</span></div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-item"><span class="emoji">📍 地点：</span><span class="wrap-text">{{ location }}</span></div>
+        <div class="grid-item"><span class="emoji">📅 创建时间：</span><span class="wrap-text">{{ created_at }}</span></div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-item"><span class="emoji">🕓 更新时间：</span><span class="wrap-text">{{ updated_at }}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info-section">
+    <h2 class="emoji">📅 贡献日历</h2>
+    <p>在过去的一年中贡献 {{ contribution_data.total }} 次</p>
+    <div class="contribution-grid">
+      <div class="contribution-months">
+        {{each contribution_data.contributions week weekIndex}}
+          {{if weekIndex % 4 === 0 && week[0]}}
+            <span class="contribution-month">{{week[0].date.split('-')[1]}}月</span>
+          {{/if}}
+        {{/each}}
+      </div>
+  
+      <div class="contribution-weeks">
+        <span class="contribution-week">周日</span>
+        <span class="contribution-week">周一</span>
+        <span class="contribution-week">周二</span>
+        <span class="contribution-week">周三</span>
+        <span class="contribution-week">周四</span>
+        <span class="contribution-week">周五</span>
+        <span class="contribution-week">周六</span>
+      </div>
+  
+      <div class="contribution-tiles">
+        {{each contribution_data.contributions week weekIndex}}
+          {{each week day dayIndex}}
+            {{set level = 0}}
+            {{if day.count === 0}}
+              {{set level = 0}}
+            {{else if day.count < 5}}
+              {{set level = 1}}
+            {{else if day.count < 10}}
+              {{set level = 2}}
+            {{else if day.count < 20}}
+              {{set level = 3}}
+            {{else}}
+              {{set level = 4}}
+            {{/if}}
+            <i class="contribution-tile" 
+               data-level="{{level}}" 
+               title="{{day.date}}: {{day.count}} contributions">
+            </i>
+          {{/each}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info-section">
+    <h2 class="emoji">📊 数据概览</h2>
+    <div class="stats">
+      <div class="stat-container">
+        <div class="stat">
+          <h3>{{ repos_count }}</h3>
+          <p class="emoji">📦 公开仓库数量</p>
+        </div>
+      </div>
+      <div class="stat-container">
+        <div class="stat">
+          <h3>{{ followers_count }}</h3>
+          <p class="emoji">⭐ 粉丝数</p>
+        </div>
+      </div>
+      <div class="stat-container">
+        <div class="stat">
+          <h3>{{ following_count }}</h3>
+          <p class="emoji">🧑‍🤝‍🧑 关注数</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+{{/block}}

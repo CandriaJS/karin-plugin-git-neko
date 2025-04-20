@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url("../font/NotoColorEmoji-Regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: "Helvetica";
+  src: url("../font/HELVETI.woff") format("woff");
+  font-display: swap
+}
+body {
+  background: rgba(255, 255, 255);
+  margin: 0;
+  padding: 40px 20px;
+  width: 1200px;
+  font-family: Helvetica, Noto Color Emoji, sans-serif
+}
