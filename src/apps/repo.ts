@@ -17,7 +17,7 @@ export const get_repo_info = karin.command(
       const img = await Render.render(
         'repo/get_repo_info',
         {
-          type: 'github',
+          platform: 'github',
           owner: repo_info.data.owner?.login ?? '未知',
           repo: repo_info.data.name ?? '未知',
           visibility: repo_info.data.private,
@@ -61,7 +61,7 @@ export const get_org_repos_list = karin.command(
       const img = await Render.render(
         'repo/get_org_repos_list',
         {
-          type: 'github',
+          platform: 'github',
           repo_list
         }
       )
@@ -104,7 +104,7 @@ export const get_user_repos_list = karin.command(
       const img = await Render.render(
         'repo/get_user_repos_list',
         {
-          type: 'github',
+          platform: 'github',
           repo_list
         }
       )

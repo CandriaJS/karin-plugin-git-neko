@@ -80,12 +80,10 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         const md = new MarkdownIt({ html: true })
         const makdown = md.render(commit_info.data.commit.body as string)
         img = await Render.render(
-          'push/index',
+          'commit/index',
           {
-            type: 'github',
-            owner,
-            repo,
-            visibility,
+            platform: 'github',
+            title: '更新推送',
             commits: [
               {
                 owner,

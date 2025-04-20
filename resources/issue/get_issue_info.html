@@ -1,0 +1,102 @@
+{{extend gitLayout}} {{block 'css'}}
+<link
+  href="{{_res_path}}/issue/css/get_issue_info.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+{{/block}} {{block 'main'}}
+
+<div class="card">
+  <div class="header">
+    {{if platform === 'github'}}
+    <h2>GitHub 议题信息</h2>
+    {{else if platform === 'gitee'}}
+    <h2>Gitee 议题信息</h2>
+    {{else if platform === 'gitcode'}}
+    <h2>GitCode 议题信息</h2>
+    {{else}}
+    <h2>GitHub 议题信息</h2>
+    {{/if}}
+  </div>
+
+  <div class="info-section">
+    <div class="issue-card">
+      <div class="repo-header">
+        <div class="platform-icon">
+          {{if platform === 'github'}}
+          <img
+            src="{{_res_path}}/common/images/icon/Github.svg"
+            alt="GitHub Logo"
+          />
+          {{else if platform === 'gitee'}}
+          <img
+            src="{{_res_path}}/common/images/icon/Gitee.svg"
+            alt="Gitee Logo"
+          />
+          {{else if platform === 'gitcode'}}
+          <img
+            src="{{_res_path}}/common/images/icon/Gitcode.svg"
+            alt="Gitcode Logo"
+          />
+          {{else}}
+          <img
+            src="{{_res_path}}/common/images/icon/Github.svg"
+            alt="GitHub Logo"
+          />
+          {{/if}}
+        </div>
+        <div class="repo-info">
+          <div class="repo-name">
+            {{owner}}/{{repo}}
+          </div>
+          <div class="repo-visibility-container">
+            <span class="repo-visibility {{visibility === 'private' ? 'private' : 'public'}}">
+              {{visibility === 'private' ? '私有' : '公开'}}
+            </span>
+          </div>
+          <div class="counts-container">
+            <div class="fork_count">
+              <img
+                src="{{_res_path}}/common/images/icon/fork.svg"
+                alt="Fork Logo"
+              >
+              <span>{{fork_count}}</span>
+            </div>
+            <div class="star_count">
+              <img
+                src="{{_res_path}}/common/images/icon/star.svg"
+                alt="Star Logo"
+              ></img>
+              <span>{{star_count}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-info">
+        <div class="issue-title">
+          <span>{{ issue_title }}</span>
+          <span class="issue-number">#{{ issue_number }}</span>
+        </div>
+        <div class="issue-state {{issue_state === 'open' ? 'open' : 'closed'}}">
+          <span class="state-badge">{{issue_state === 'open' ? '开放' : '已关闭'}}</span>
+        </div>
+        
+        <div class="issue-body">
+          <div class="avatar">
+            <img src="{{ author_avatar }}" alt="Author Avatar" />
+          </div>
+          <div class="issue-content">
+            <div class="author-info">
+              <span class="author-name">{{ author_name }}</span>
+              <span class="issue-created-at">{{ issue_created_at }}</span>
+            </div>
+            <div class="issue-body-content">{{@issue_body}}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{{/block}}

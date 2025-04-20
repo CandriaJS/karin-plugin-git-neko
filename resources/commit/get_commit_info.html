@@ -8,32 +8,33 @@
 
 <div class="card">
   <div class="header">
-    {{if type === 'github'}}
-    <h2>GitHub 提交信息</h2>
-    {{else if type === 'gitee'}}
-    <h2>Gitee 提交信息</h2>
-    {{else if type === 'gitcode'}}
-    <h2>GitCode 提交信息</h2>
+    {{if platform === 'github'}}
+    <h2>GitHub 更新推送</h2>
+    {{else if platform === 'gitee'}}
+    <h2>Gitee 更新推送</h2>
+    {{else if platform === 'gitcode'}}
+    <h2>GitCode 更新推送</h2>
     {{else}}
-    <h2>GitHub 提交信息</h2>
+    <h2>GitHub 更新推送</h2>
     {{/if}}
   </div>
 
   <div class="info-section">
+    {{each commits commit}}
     <div class="commit-card">
       <div class="repo-header">
         <div class="platform-icon">
-          {{if type === 'github'}}
+          {{if platform === 'github'}}
           <img
             src="{{_res_path}}/common/images/icon/Github.svg"
             alt="GitHub Logo"
           />
-          {{else if type === 'gitee'}}
+          {{else if platform === 'gitee'}}
           <img
             src="{{_res_path}}/common/images/icon/Gitee.svg"
             alt="Gitee Logo"
           />
-          {{else if type === 'gitcode'}}
+          {{else if platform === 'gitcode'}}
           <img
             src="{{_res_path}}/common/images/icon/Gitcode.svg"
             alt="Gitcode Logo"
@@ -47,9 +48,9 @@
         </div>
         <div class="repo-info">
           <div class="repo-name">
-            {{owner}}/{{repo}}
-            <span class="repo-visibility {{visibility === 'private' ? 'private' : 'public'}}">
-              {{visibility === 'private' ? '私有' : '公开'}}
+            {{commit.owner}}/{{commit.repo}}
+            <span class="repo-visibility {{commit.visibility === 'private' ? 'private' : 'public'}}">
+              {{commit.visibility === 'private' ? '私有' : '公开'}}
             </span>
           </div>
           <div class="branch-info">
@@ -59,18 +60,17 @@
                 alt="Branch Logo"
               />
             </div>
-            <div class="branch-name">{{branch}}</div>
+            <div class="branch-name">{{commit.branch}}</div>
           </div>
         </div>
       </div>
 
-        <div class="author-info">
-          <div class="author-avatar">
-            <img src="{{ author_avatar }}" alt="Author Avatar" />
-          </div>
-          <span>{{ author_name }}</span>
-          <span class="time-info">•&nbsp;提交于&ensp;{{ commit_date }} </span>
+      <div class="author-info">
+        <div class="author-avatar">
+          <img src="{{ commit.author_avatar }}" alt="Author Avatar" />
         </div>
+        <span>{{ commit.author_name }}</span>
+        <span class="time-info">•&nbsp;提交于&ensp;{{ commit.commit_date }} </span>
       </div>
 
       <div class="commit-message">
@@ -81,22 +81,24 @@
               alt="Commit Icon"
             />
           </div>
-          <span>{{ commit_title }}</span>
+          <span>{{ commit.commit_title }}</span>
           <div class="code-changes">
-            <span class="changes-added">+{{ commit_additions }}</span>
-            <span class="changes-deleted">-{{ commit_deletions }}</span>
+            <span class="changes-added">+{{ commit.commit_additions }}</span>
+            <span class="changes-deleted">-{{ commit.commit_deletions }}</span>
             <span class="changes-divider">•</span>
-            <span>{{ commit_files_total }} 个文件被更改</span>
+            <span>{{ commit.commit_files_total }} 个文件被更改</span>
             <span class="changes-divider">•</span>
-            <span class="commit-hash">{{ sha }}</span>
+            <span class="commit-hash">{{ commit.sha }}</span>
           </div>
         </div>
         <div class="commit-divider"></div>
-        {{if commit_body}}
-        <div class="commit-content">{{@commit_body}}</div>
+        {{if commit.commit_body}}
+        <div class="commit-content">{{@commit.commit_body}}</div>
         {{/if}}
       </div>
     </div>
+    {{/each}}
   </div>
+</div>
 
 {{/block}}

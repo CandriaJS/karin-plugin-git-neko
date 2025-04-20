@@ -10,7 +10,7 @@ export const get_user_info = karin.command(
     try {
       const match = e.msg.match(get_user_info.reg)
       const [, name] = match!
-      const token = await utils.get_user_token(e.userId) as string
+      const token = await utils.get_user_token(e.userId)
       const gh = github.get_github(token)
       const user = await gh.get_user()
       let user_info
@@ -25,7 +25,7 @@ export const get_user_info = karin.command(
       const img = await Render.render(
         'user/get_user_info',
         {
-          type: 'github',
+          platform: 'github',
           username: user_info.data.login,
           name: user_info.data.name,
           avatar: user_info.data.avatar_url,

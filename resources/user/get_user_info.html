@@ -10,21 +10,21 @@ type="text/css"
 
 <div class="card">
   <div class="header">
-    {{if type === 'github'}}
+    {{if platform === 'github'}}
     <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
-    {{else if type === 'gitee'}}
+    {{else if platform === 'gitee'}}
     <img src="{{_res_path}}/common/images/icon/Gitee.svg" alt="Gitee Logo">
-    {{else if type === 'gitcode'}}
+    {{else if platform === 'gitcode'}}
     <img src="{{_res_path}}/common/images/icon/Gitcode.svg" alt="Gitcode Logo">
     {{else}}
     <img src="{{_res_path}}/common/images/icon/Github.svg" alt="GitHub Logo">
     {{/if}}
 
-    {{if type === 'github'}}
+    {{if platform === 'github'}}
     <h2>GitHub 用户信息</h2>
-    {{else if type === 'gitee'}}
+    {{else if platform === 'gitee'}}
     <h2>Gitee 用户信息</h2>
-    {{else if type === 'gitcode'}}
+    {{else if platform === 'gitcode'}}
     <h2>GitCode 用户信息</h2>
     {{else}}
     <h2>GitHub 用户信息</h2>
