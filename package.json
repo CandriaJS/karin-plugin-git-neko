@@ -1,0 +1,70 @@
+{
+  "name": "karin-plugin-git-neko",
+  "version": "0.0.1-beta.1745146506",
+  "author": "ClarityJS",
+  "type": "module",
+  "main": "lib/index.js",
+  "description": "关于一个Karin插件，主要提供在BOT上对Github，Gitee, GitCode等Git平台操作",
+  "license": "GNU General Public License v3.0",
+  "keywords": [
+    "karin-plugin",
+    "karin-plugin-git-neko"
+  ],
+  "homepage": "https://github.com/ClarityJS/karin-plugin-git-neko",
+  "bugs": {
+    "url": "https://github.com/ClarityJS/karin-plugin-git-neko/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClarityJS/karin-plugin-git-neko.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc --noEmit && tsup",
+    "pub": "npm publish --access public",
+    "dev": "tsx src/index.ts",
+    "dev:watch": "tsx watch --include \"src/**/*.ts\" src/index.ts"
+  },
+  "dependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "body-parser": "^2.2.0",
+    "express-art-template": "^1.0.1",
+    "git-neko-kit": "https://pkg.pr.new/git-neko-kit@4d290d6",
+    "markdown-it": "^14.1.0",
+    "sequelize": "^6.37.7"
+  },
+  "files": [
+    "config/",
+    "lib/",
+    "resources/",
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "karin": {
+    "main": "src/index.ts",
+    "apps": [
+      "lib/apps"
+    ],
+    "ts-apps": [
+      "src/apps"
+    ],
+    "static": [
+      "resources"
+    ],
+    "files": [
+      "config",
+      "data",
+      "resources"
+    ],
+    "web": "./lib/web.config.js",
+    "ts-web": "./src/web.config.ts"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "packageManager": "pnpm@9.13.2"
+}

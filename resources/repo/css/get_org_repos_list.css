@@ -1,0 +1,109 @@
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  max-width: 780px;
+  width: 90%;
+  padding: 50px;
+  margin: 20px auto;
+  transition: transform 0.3s ease;
+}
+.card .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.card .header img {
+  width: 35px;
+  height: 35px;
+}
+
+.card .header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.repo-list {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.repo-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 22px;
+}
+
+.repo-name {
+  font-size: 30px;
+  color: rgb(3, 102, 214);
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.repo-visibility {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 5px 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  font-size: 18px;
+  font-weight: 500;
+  transform: translateY(-5px);
+}
+
+.repo-visibility.public {
+  background-color: #e6f7e6;
+  color: #2c974b;
+  border: 1px solid #2c974b;
+}
+
+.repo-visibility.private {
+  background-color: #ffebeb;
+  color: #cb2431;
+  border: 1px solid #cb2431;
+}
+
+.repo-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+  color: rgb(88, 96, 105);
+}
+
+.repo-language {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.repo-language::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background-color: var(--lang-color);
+}
+
+.repo-stars {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.repo-pushed {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
