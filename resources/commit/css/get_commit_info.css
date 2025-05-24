@@ -70,11 +70,11 @@ body {
   align-items: center; 
   justify-content: center; 
   margin-left: 5px;
-  padding: 5px 20px;
+  padding: 10px 20px;
+  margin-bottom: 5px;
   border-radius: 30px;
   font-size: 15px;
   font-weight: 500;
-  height: 36px;
   line-height: 1;
 }
 
@@ -94,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0px;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 
 .branch-icon img{
@@ -104,7 +104,7 @@ body {
 }
 
 .author-info {
-  background-color: rgba(130, 228, 235, 0.8);
+  background-color: rgba(180, 186, 237, 0.8);
   border-radius: 8px;
   padding: 12px 16px;
   margin-top: 15px;
@@ -133,7 +133,7 @@ body {
 
 .commit-message {
   margin-top: 10px;
-  background-color: rgba(197, 196, 243, 0.8);
+  background-color: rgba(130, 228, 235, 0.8);
   border-radius: 8px;
   padding: 10px;
   border-left: 4px solid rgb(50, 173, 230);

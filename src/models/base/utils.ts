@@ -25,13 +25,11 @@ const getRemoteIP = async () => {
 }
 
 /**
- * 获取本地和远程的base_url
- * @returns {Promise<{ local_url: string, remote_url: string }>} base_url
+ * 获取远程ip地址
+ * @returns remote_url - 远程地址
  */
-export async function get_base_url () {
-  let local_url, remote_url
+export async function get_base_url (): Promise<string> {
   const prefix = 'http://'
-  local_url = `${prefix}${process.env.HTTP_HOST}:${process.env.HTTP_PORT}/git`
-  remote_url = `${prefix}${await getRemoteIP()}:${process.env.HTTP_PORT}/git`
-  return { local_url, remote_url }
+  const remote_url = `${prefix}${await getRemoteIP()}:${process.env.HTTP_PORT}/git`
+  return remote_url
 }

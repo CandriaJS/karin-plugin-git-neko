@@ -59,7 +59,7 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
     }
 
     await Promise.all(webhooks.map(async (webhook) => {
-      const token = await utils.get_user_token(String(webhook.user_id))
+      const token = await utils.get_user_token(String(webhook.userId))
       gh.setToken(token as string)
     }))
 
@@ -114,7 +114,7 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
     }
     /** 未来会扩展为可以私聊发送， 或许(bushi) */
     await Promise.all(webhooks.map(webhook =>
-      utils.send_msg('group', String(webhook.bot_id), String(webhook.group_id), img)
+      utils.send_msg('group', String(webhook.botId), String(webhook.groupId), img)
     ))
   } catch (error) {
     logger.error(error)

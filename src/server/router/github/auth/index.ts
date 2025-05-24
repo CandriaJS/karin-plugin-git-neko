@@ -21,9 +21,9 @@ AuthRouter.get('/', async (req: Request, res: Response) => {
     const expires_in = token.data.expires_in
     const refresh_token = token.data.refresh_token as string
     const refresh_token_expires_in = token.data.refresh_token_expires_in as number
-    const user_id = await base.get_user_id_by_state_id(state_id) as string
+    const userId = await base.get_userId_by_state_id(state_id) as string
     await db.github.add({
-      user_id,
+      userId,
       state_id,
       access_token,
       expires_in,

@@ -3,29 +3,17 @@ import { dbType } from '@/types'
 type Model = dbType['subscription']
 
 export const table = sequelize.define('subscription', {
-  /**
-   * 主键Id
-   * @type {Number}
-   */
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    comment: '主键'
+    comment: '主键ID'
   },
-  /**
-   * 订阅的平台类型，如：github、gitee、gitlab等
-   * @type {String}
-   */
   platform: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '平台类型'
   },
-  /**
-   * 仓库的拥有者
-   * @type {String}
-   */
   owner: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -36,38 +24,27 @@ export const table = sequelize.define('subscription', {
     allowNull: false,
     comment: '仓库名称'
   },
-  /**
-   * 订阅仓库的事件类型，如：push、release等
-   * @type {String[]}
-   */
+  branch: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    comment: '仓库分支'
+  },
   event: {
     type: DataTypes.JSON,
     allowNull: false,
     comment: '订阅类型'
   },
-  /**
-   * BOT ID，订阅者的机器人Id
-   * @type {String}
-   */
-  bot_id: {
+  botId: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '机器人Id'
   },
-  /**
-   * 用户Id，订阅者的Id
-   * @type {String}
-   */
-  user_id: {
+  userId: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '用户Id'
   },
-  /**
-   * 群聊Id
-   * @type {String}
-   */
-  group_id: {
+  groupId: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '群聊Id'
@@ -76,7 +53,13 @@ export const table = sequelize.define('subscription', {
   freezeTableName: true,
   defaultScope: {
     raw: true
-  }
+  },
+  indexes: [
+    {
+      unique: true,
+      fields: ['platform', 'owner', 'repo', 'botId', 'userId', 'groupId']
+    }
+  ]
 })
 
 await table.sync()
@@ -88,38 +71,41 @@ await table.sync()
  * @param param.owner - 订阅的仓库的拥有者
  * @param param.repo - 订阅的仓库的名称
  * @param param.event - 订阅的仓库的事件类型，如：push、release等
- * @param param.bot_id - 订阅者的机器人Id
- * @param param.user_id - 订阅者的用户Id
- * @param param.group_id - 群聊Id
+ * @param param.botId - 订阅者的机器人Id
+ * @param param.userId - 订阅者的用户Id
+ * @param param.groupId - 群聊Id
  */
 export async function add ({
   platform,
   owner,
   repo,
+  branch,
   event,
-  bot_id,
-  user_id,
-  group_id
+  botId,
+  userId,
+  groupId
 }: {
   platform: string;
   owner: string;
   repo: string;
+  branch: string;
   event: string[];
-  bot_id: string | number;
-  user_id: string | number;
-  group_id: string | number;
+  botId: string | number;
+  userId: string | number;
+  groupId: string | number;
 }): Promise<[Model, boolean | null]> {
-  group_id = String(group_id)
-  user_id = String(user_id)
-  bot_id = String(bot_id)
+  groupId = String(groupId)
+  userId = String(userId)
+  botId = String(botId)
   const data = {
     platform,
     owner,
     repo,
+    branch,
     event,
-    bot_id,
-    user_id,
-    group_id
+    botId,
+    userId,
+    groupId
   }
   return await table.upsert(data) as [Model, boolean | null]
 }
@@ -130,34 +116,32 @@ export async function add ({
  * @param param.platform - 订阅的来源，如：'github'、'gitee'、'gitlab'等
  * @param param.owner - 订阅的仓库的拥有者
  * @param param.repo - 订阅的仓库的名称
- * @param param.user_id - 订阅者的用户Id
- * @param param.group_id - 群聊Id
+ * @param param.userId - 订阅者的用户Id
+ * @param param.groupId - 群聊Id
  * @returns 查询到的订阅信息，如果没有则返回null
  */
 export async function get ({
   platform,
   owner,
   repo,
-  bot_id,
-  user_id,
-  group_id
+  botId,
+  userId,
+  groupId
 }: {
   platform: string;
   owner: string;
   repo: string;
-  bot_id: string | number;
-  user_id: string | number;
-  group_id: string | number;
+  botId: string;
+  userId: string;
+  groupId: string | number;
 }): Promise<Model | null> {
-  user_id = String(user_id)
-  group_id = String(group_id)
   const data = {
     platform,
     owner,
     repo,
-    bot_id,
-    user_id,
-    group_id
+    botId,
+    userId,
+    groupId
   }
   return await table.findOne({
     where: data

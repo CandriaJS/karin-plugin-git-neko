@@ -75,13 +75,15 @@
 
       <div class="issue-info">
         <div class="issue-title">
-          <span>{{ issue_title }}</span>
+          <div>
+            <h1>{{@issue_title}}</h1>
+          </div>
           <span class="issue-number">#{{ issue_number }}</span>
         </div>
         <div class="issue-state {{issue_state === 'open' ? 'open' : 'closed'}}">
           <span class="state-badge">{{issue_state === 'open' ? '开放' : '已关闭'}}</span>
         </div>
-        
+
         <div class="issue-body">
           <div class="avatar">
             <img src="{{ author_avatar }}" alt="Author Avatar" />
@@ -91,7 +93,9 @@
               <span class="author-name">{{ author_name }}</span>
               <span class="issue-created-at">{{ issue_created_at }}</span>
             </div>
+            {{if issue_body}}
             <div class="issue-body-content">{{@issue_body}}</div>
+            {{/if}}
           </div>
         </div>
       </div>

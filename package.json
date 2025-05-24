@@ -1,11 +1,7 @@
 {
-  "name": "karin-plugin-git-neko",
+  "name": "@candriajs/karin-plugin-git-neko",
   "version": "0.0.1",
-  "author": "ClarityJS",
-  "type": "module",
-  "main": "lib/index.js",
-  "description": "关于一个Karin插件，主要提供在BOT上对Github，Gitee, GitCode等Git平台操作",
-  "license": "GNU General Public License v3.0",
+  "description": "关于一个Karin插件, 主要提供在BOT上对Github, Gitee, GitCode等Git平台操作",
   "keywords": [
     "karin-plugin",
     "karin-plugin-git-neko"
@@ -18,19 +14,34 @@
     "type": "git",
     "url": "git+https://github.com/ClarityJS/karin-plugin-git-neko.git"
   },
+  "license": "GNU General Public License v3.0",
+  "author": "ClarityJS",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "config/",
+    "lib/",
+    "resources/",
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "scripts": {
+    "app": "node --import tsx src/app.ts",
+    "build": "tsc --noEmit && tsup",
+    "dev": "cross-env EBV_FILE=\"development.env\" node --import tsx src/app.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "tsc --noEmit && tsup",
     "pub": "npm publish --access public",
-    "dev": "tsx src/index.ts",
-    "dev:watch": "tsx watch --include \"src/**/*.ts\" src/index.ts"
+    "sort": "sort-package-json",
+    "watch": "cross-env EBV_FILE=\"development.env\" tsx watch --include \"src/**/*.ts\" src/app.ts"
   },
   "dependencies": {
+    "@candriajs/git-neko-kit": "https://pkg.pr.new/CandriaJS/git-neko-kit/@candriajs/git-neko-kit@98a3d54",
     "@types/markdown-it": "^14.1.2",
     "body-parser": "^2.2.0",
     "express-art-template": "^1.0.1",
-    "git-neko-kit": "https://pkg.pr.new/git-neko-kit@4d290d6",
     "markdown-it": "^14.1.0",
     "sequelize": "^6.37.7"
   },
@@ -43,22 +54,18 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.15.0",
     "neostandard": "^0.12.1",
-    "node-karin": "^1.7.14",
+    "node-karin": "^1.9.7",
     "tsc-alias": "^1.8.11",
     "tsup": "^8.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0"
   },
-  "files": [
-    "config/",
-    "lib/",
-    "resources/",
-    "LICENSE",
-    "package.json",
-    "README.md",
-    "CHANGELOG.md"
-  ],
+  "packageManager": "pnpm@9.13.2",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "karin": {
     "main": "src/index.ts",
     "apps": [
@@ -77,10 +84,5 @@
     ],
     "web": "./lib/web.config.js",
     "ts-web": "./src/web.config.ts"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "packageManager": "pnpm@9.13.2"
+  }
 }

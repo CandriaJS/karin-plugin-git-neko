@@ -1,10 +1,14 @@
 import { db } from '@/models'
 type Model = db.base.Model
 export interface githubType extends Model {
+  /** 主键id */
+  id: number
+  /** 机器人Id */
+  botId: string
   /** 用户id */
-  user_id: string
-  /** 状态id */
-  state_id: string
+  userId: string
+  /** Github用户名 */
+  github_username: string
   /** access_token */
   access_token: string | null
   /** 过期时间 */

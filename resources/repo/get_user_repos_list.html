@@ -47,8 +47,8 @@ type="text/css"
     {{each repo_list repo}}
     <div class="repo-item">
       <span class="repo-name">{{repo.name}}</span>
-      <span class="repo-visibility {{repo.visibility ? 'private' : 'public'}}">
-        {{repo.visibility ? '私有' : '公开'}}
+      <span class="repo-visibility {{repo.visibility === 'private' ? 'private' : 'public'}} {{repo.archived ? 'archived' : ''}}">
+        {{repo.visibility === 'private' ? '私有' : '公开'}}{{repo.archived ? '存档' : ''}}
       </span>
       <div class="repo-meta">
         <span class="repo-language">{{repo.language}}</span>

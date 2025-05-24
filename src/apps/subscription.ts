@@ -13,14 +13,14 @@ export const subscription = karin.command(
         throw new Error('喵呜~, 请在群聊中使用此命令')
       }
       const event = ['push']
-      const group_id = 'groupId' in e ? e.groupId : ''
-      const user_id = e.userId
-      const bot_id = e.selfId
-      if (await github.get_subscription(owner, repo, bot_id, user_id, group_id)) {
+      const groupId = 'groupId' in e ? e.groupId : ''
+      const userId = e.userId
+      const botId = e.selfId
+      if (await github.get_subscription(owner, repo, botId, userId, groupId)) {
         throw new Error('喵呜~, 您已经订阅过此仓库')
       }
       try {
-        await github.add_subscription(owner, repo, event, bot_id, user_id, group_id)
+        await github.add_subscription(owner, repo, event, botId, userId, groupId)
         await e.reply(`订阅: ${owner}/${repo} 成功`)
       } catch (error) {
         throw new Error('喵呜~, 添加订阅失败, 请尝试重试或联系管理员')

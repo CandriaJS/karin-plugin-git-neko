@@ -84,11 +84,11 @@ body {
   align-items: center; 
   justify-content: center; 
   margin-left: 5px;
-  padding: 5px 20px;
+  padding: 10px 20px;
+  margin-bottom: 5px;
   border-radius: 30px;
   font-size: 15px;
   font-weight: 500;
-  height: 36px;
   line-height: 1;
 }
 
@@ -118,6 +118,20 @@ body {
   color: rgb(34, 34, 34);
   padding: 15px 15px 10px;
   border-bottom: 1px solid rgb(230, 230, 230);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.issue-title h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.issue-number {
+  color: rgb(101, 109, 118);
+  font-size: 26px;
+  font-weight: normal;
 }
 
 .issue-state {

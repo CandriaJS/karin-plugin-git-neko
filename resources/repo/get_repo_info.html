@@ -50,8 +50,8 @@ type="text/css"
 
     <div class="info-label">仓库状态：</div>
     <div class="info-value">
-      <span class="repo-visibility {{visibility ? 'private' : 'public'}}">
-        {{visibility ? '私有' : '公开'}}
+      <span class="repo-visibility {{visibility === 'private' ? 'private' : 'public'}} {{archived ? 'archived' : ''}}">
+        {{visibility === 'private' ? '私有' : '公开'}}{{archived ? '存档' : ''}}
       </span>
     </div>
 

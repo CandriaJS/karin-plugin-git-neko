@@ -1,14 +1,14 @@
-import karin, { AdapterType, logger } from 'node-karin'
+import karin, { AdapterType, logger, SendElement } from 'node-karin'
 
 /**
  * 发送消息
  * @param type - 消息类型，可选值为 'group' 或 'private'
  * @param botId - 机器人的 ID
  * @param id - 消息接收者的 ID，当 type 为 'group' 时为群聊 ID，当 type 为 'private' 时为用户 ID
- * @param {any} msg - 要发送的消息内容，可以是任何类型的消息，如segment.imag等
- * @returns {Promise<any>} 一个 Promise 对象，解析为发送消息的结果
+ * @param msg - 要发送的消息内容，可以是任何类型的消息，如segment.imag等
+ * @returns 发送消息的结果
  */
-export async function send_msg (type: string, botId: string, id: string, msg: any) {
+export async function send_msg (type: string, botId: string, id: string, msg: Array<SendElement>) {
   try {
     const bot = karin.getBot(botId) as AdapterType
     if (type === 'group') {

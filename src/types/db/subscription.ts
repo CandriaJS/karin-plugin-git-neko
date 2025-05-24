@@ -8,12 +8,14 @@ export interface subscriptionType extends Model {
   owner: string
   /** 仓库名 */
   repo: string
+  /** 分支名 */
+  branch: string
   /** 事件 */
   event: string[]
   /** 机器人id */
-  bot_id: string | number
+  botId: string | number
   /** 用户id */
-  user_id: string | number
+  userId: string | number
   /** 群组id */
-  group_id: string | number
+  groupId: string | number
 }

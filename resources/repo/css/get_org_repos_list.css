@@ -35,7 +35,7 @@
 
 .repo-item {
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255);
   display: block;
   width: 100%;
   text-align: left;
@@ -50,27 +50,34 @@
   margin-bottom: 5px;
 }
 .repo-visibility {
-  display: inline-block;
-  margin-left: 10px;
-  padding: 5px 20px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 60px;
-  font-size: 18px;
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center; 
+  margin-left: 5px;
+  padding: 10px 20px;
+  margin-bottom: 5px;
+  border-radius: 30px;
+  font-size: 15px;
   font-weight: 500;
-  transform: translateY(-5px);
+  line-height: 1;
 }
 
 .repo-visibility.public {
-  background-color: #e6f7e6;
-  color: #2c974b;
-  border: 1px solid #2c974b;
+  background-color: rgb(230, 247, 230); 
+  color: rgb(44, 151, 75);
+  border: 1px solid rgb(44, 151, 75);
 }
 
 .repo-visibility.private {
-  background-color: #ffebeb;
-  color: #cb2431;
-  border: 1px solid #cb2431;
+  background-color: rgb(255, 235, 235); 
+  color: rgb(203, 36, 49);
+  border: 1px solid rgb(203, 36, 49);
+}
+
+.repo-visibility.archived {
+  background-color: rgb(255, 248, 231);
+  color: rgb(154, 103, 0);
+  border: 1px solid rgb(154, 103, 0);
 }
 
 .repo-meta {
