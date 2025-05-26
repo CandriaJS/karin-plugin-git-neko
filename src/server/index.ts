@@ -12,7 +12,7 @@ export const startServer = async (): Promise<boolean> => {
     server.use('/git', app)
     logger.info(logger.chalk.bold.green(`=== [${Version.Plugin_AliasName}] 服务启动完成 🚀 ==`))
     logger.info(logger.chalk.rgb(145, 195, 240)(`耗时: ${Date.now() - startTime}ms`))
-    logger.info(logger.chalk.rgb(145, 195, 240)(`本地地址: ${(await base.get_base_url()).local_url}`))
+    logger.info(logger.chalk.rgb(145, 195, 240)(`本地地址: ${await base.get_base_url()}`))
     logger.info(logger.chalk.bold.green('==================='))
     return true
   } catch (error) {

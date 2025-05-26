@@ -6,13 +6,6 @@ type Model = dbType['github']
  * GitHub用户数据
  */
 export const table = sequelize.define('github', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-    comment: '主键id'
-  },
   botId: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -67,7 +60,7 @@ await table.sync()
  * 添加用户信息
  * @param param - 用户信息对象
  * @param param.userId - 用户ID
- * @param param.state_id - 状态ID
+ * @param param.stateId - 状态ID
  * @param param.access_token - 访问令牌
  * @param param.expires_in - 过期时间
  * @param param.refresh_token - 刷新令牌
@@ -78,10 +71,10 @@ export async function add ({
   botId,
   userId,
   github_username,
-  access_token = null,
-  expires_in = null,
-  refresh_token = null,
-  refresh_token_expires_in = null
+  access_token,
+  expires_in,
+  refresh_token,
+  refresh_token_expires_in
 }: {
   botId: string,
   userId: string,
@@ -107,28 +100,21 @@ export async function add ({
  * 获取用户信息
  * @param botId - 机器人ID
  * @param userId - 用户ID
- * @param [github_username] - 用户名(github的登录名)，可选参数
  * @returns 用户信息
  */export async function get (
   {
     botId,
-    userId,
-    github_username
+    userId
   }:{
     botId: string,
     userId: string,
-    github_username?: string
   }): Promise<Model | null> {
   const data: {
     botId: string;
     userId: string;
-    github_username?: string;
   } = {
     botId,
     userId
-  }
-  if (github_username) {
-    data.github_username = github_username
   }
   return await table.findOne({
     where: data

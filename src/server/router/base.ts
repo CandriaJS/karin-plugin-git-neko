@@ -1,8 +1,9 @@
-import { Request, Response, Router } from 'node-karin/express'
+import type { Request, Response, Router } from 'express'
+import express from 'node-karin/express'
 
 import { Version } from '@/root'
 
-const BaseRouter: Router = Router()
+const BaseRouter: Router = express.Router()
 
 BaseRouter.get('/version', (req: Request, res: Response) => {
   res.status(200).json(

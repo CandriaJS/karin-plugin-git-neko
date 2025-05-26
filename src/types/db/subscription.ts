@@ -13,9 +13,9 @@ export interface subscriptionType extends Model {
   /** 事件 */
   event: string[]
   /** 机器人id */
-  botId: string | number
+  botId: string
   /** 用户id */
-  userId: string | number
+  userId: string
   /** 群组id */
-  groupId: string | number
+  groupId: string
 }

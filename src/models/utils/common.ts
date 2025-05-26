@@ -1,5 +1,3 @@
-import { utils } from '@candriajs/git-neko-kit'
-
 import { db } from '@/models'
 import { dbType } from '@/types'
 type githubModel = dbType['github']
@@ -21,19 +19,14 @@ type subscriptionModel = dbType['subscription']
  */
 export async function get_user_info (
   botId: string,
-  userId: string,
-  github_username: string
+  userId: string
 ): Promise<githubModel | null> {
   const data: {
     botId: string;
     userId: string;
-    github_username?: string;
   } = {
     botId,
     userId
-  }
-  if (github_username) {
-    data.github_username = github_username
   }
   return await db.github.get(data)
 }
@@ -63,13 +56,11 @@ export async function add_user_info ({
   botId: string,
   userId: string,
   github_username: string,
-  access_token: string,
+  access_token: string | null,
   expires_in: number | null,
-  refresh_token: string,
+  refresh_token: string | null,
   refresh_token_expires_in: number | null
 }): Promise<[githubModel, boolean | null]> {
-  expires_in = Number(expires_in)
-  refresh_token_expires_in = Number(refresh_token_expires_in)
   const data = {
     botId,
     userId,

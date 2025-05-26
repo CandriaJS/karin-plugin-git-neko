@@ -6,16 +6,16 @@
     "karin-plugin",
     "karin-plugin-git-neko"
   ],
-  "homepage": "https://github.com/ClarityJS/karin-plugin-git-neko",
+  "homepage": "https://github.com/CandriaJS/karin-plugin-git-neko",
   "bugs": {
-    "url": "https://github.com/ClarityJS/karin-plugin-git-neko/issues"
+    "url": "https://github.com/CandriaJS/karin-plugin-git-neko/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ClarityJS/karin-plugin-git-neko.git"
+    "url": "git+https://github.com/CandriaJS/karin-plugin-git-neko.git"
   },
   "license": "GNU General Public License v3.0",
-  "author": "ClarityJS",
+  "author": "CandriaJS",
   "type": "module",
   "main": "lib/index.js",
   "files": [
@@ -38,18 +38,21 @@
     "watch": "cross-env EBV_FILE=\"development.env\" tsx watch --include \"src/**/*.ts\" src/app.ts"
   },
   "dependencies": {
-    "@candriajs/git-neko-kit": "https://pkg.pr.new/CandriaJS/git-neko-kit/@candriajs/git-neko-kit@98a3d54",
-    "@types/markdown-it": "^14.1.2",
+    "@candriajs/git-neko-kit": "^0.7.5",
     "body-parser": "^2.2.0",
     "express-art-template": "^1.0.1",
     "markdown-it": "^14.1.0",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
+    "@karinjs/plugin-puppeteer": "^1.0.17",
     "@types/body-parser": "^1.19.5",
+    "@types/express": "^5.0.2",
     "@types/lodash": "^4.17.16",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.13.14",
     "@typescript-eslint/parser": "^8.28.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.23.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.15.0",

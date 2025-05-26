@@ -3,13 +3,6 @@ import { dbType } from '@/types'
 type Model = dbType['bind']
 
 export const table = sequelize.define('bind', {
-  id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-    comment: '主键Id'
-  },
   platform: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -70,7 +63,7 @@ export async function get ({
   platform: string
   botId: string
   userId: string
-  groupId: string
+  groupId?: string
 }): Promise<Model | null> {
   platform = String(platform)
   botId = String(botId)

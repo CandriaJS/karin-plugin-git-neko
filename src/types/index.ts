@@ -1,3 +1,4 @@
+export { AdminConfigType } from '@/types/admin'
 export { VersionType } from '@/types/common'
 export { ConfigType } from '@/types/config'
 export { dbType } from '@/types/db'
