@@ -1,4 +1,4 @@
-import Client, { utils } from '@candriajs/git-neko-kit'
+import Client, { create_state_id } from '@candriajs/git-neko-kit'
 import { redis } from 'node-karin'
 
 import { Config } from '@/common'
@@ -9,28 +9,28 @@ import { Version } from '@/root'
  * @param {object} e - 事件对象，包含用户的 userId 属性
  * @returns {Promise<string>} 生成的状态标识符
  */
-export async function get_state_id (botId: string, userId: string) {
+export async function get_stateId (botId: string, userId: string) {
   const redis_key_prefix = `karin:${Version.Plugin_Name}:github`
-  const existing_state_id = await redis.get(`${redis_key_prefix}:user:${userId}`)
+  const existing_stateId = await redis.get(`${redis_key_prefix}:user:${userId}`)
 
-  if (existing_state_id) {
+  if (existing_stateId) {
     await redis.del(`${redis_key_prefix}:user:${userId}`)
-    await redis.del(`${redis_key_prefix}:state_id:${existing_state_id}`)
+    await redis.del(`${redis_key_prefix}:stateId:${existing_stateId}`)
   }
 
-  const state_id = await utils.create_state_id()
+  const stateId = await create_state_id()
   const userData = JSON.stringify({ botId, userId })
-  await redis.set(`${redis_key_prefix}:user:${userId}`, state_id, { EX: 600 })
-  await redis.set(`${redis_key_prefix}:state_id:${state_id}`, userData, { EX: 600 })
-  return state_id
+  await redis.set(`${redis_key_prefix}:user:${userId}`, stateId, { EX: 600 })
+  await redis.set(`${redis_key_prefix}:stateId:${stateId}`, userData, { EX: 600 })
+  return stateId
 }
 
 /**
- * 通过state_id查询对应的用户ID
+ * 通过stateId查询对应的用户ID
  * @param  stateId - 要查询的状态标识符
  * @returns 对应的用户ID，未找到返回null
  */
-export async function get_user (stateId: string): Promise<string | null> {
+export async function get_user (stateId: string): Promise<{ botId: string, userId: string } | null> {
   const redis_key = `karin:${Version.Plugin_Name}:github:stateId:${stateId}`
   const userData = await redis.get(redis_key)
   if (!userData) return null
@@ -48,8 +48,7 @@ export async function get_user (stateId: string): Promise<string | null> {
 export async function get_client () {
   try {
     if (
-      !(Config.github.APPID ||
-      Config.github.PrivateKey ||
+      !(Config.github.PrivateKey ||
       Config.github.ClientID ||
       Config.github.ClientSecret ||
       Config.github.WebhookSecret)

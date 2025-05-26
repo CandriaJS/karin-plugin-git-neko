@@ -5,17 +5,8 @@ href="{{_res_path}}/repo/css/get_org_repos_list.css"
 rel="stylesheet" 
 type="text/css" 
 />
-<link
-href="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.css"
-rel="stylesheet"
-type="text/css"
-/>
 {{/block}}
 
-{{block 'scripts'}}
-<script src="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.js"></script>
-<script src="{{_res_path}}/repo/js/language-colors.js"></script>
-{{/block}}
 {{block 'main'}}
 
 <div class="card">
@@ -31,13 +22,13 @@ type="text/css"
     {{/if}}
 
     {{if platform === 'github'}}
-    <h2>GitHub 用户仓库列表</h2>
+    <h2>GitHub 组织仓库列表</h2>
     {{else if platform === 'gitee'}}
-    <h2>Gitee 用户仓库列表</h2>
+    <h2>Gitee 组织仓库列表</h2>
     {{else if platform === 'gitcode'}}
-    <h2>GitCode 用户仓库列表</h2>
+    <h2>GitCode 组织仓库列表</h2>
     {{else}}
-    <h2>GitHub 用户仓库列表</h2>
+    <h2>GitHub 组织仓库列表</h2>
     {{/if}}
 
   </div>
@@ -49,7 +40,7 @@ type="text/css"
       <span class="repo-visibility {{repo.visibility === 'private' ? 'private' : 'public'}} {{repo.archived ? 'archived' : ''}}">
         {{repo.visibility === 'private' ? '私有' : '公开'}}{{repo.archived ? '存档' : ''}}
       </span>
-      <div class="repo-meta">
+      <div class="repo-meta" style="--language-color: {{repo.language_color}}">
         <span class="repo-language">{{repo.language}}</span>
         <span class="repo-stars">⭐{{repo.star_count}}</span>
         <span class="repo-pushed">最后推送时间: {{repo.pushed_at}}</span>

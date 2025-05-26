@@ -64,15 +64,6 @@
   color: rgba(102, 102, 102);
 }
 
-.user-info .website {
-  margin: 5px 0;
-}
-
-.user-info .website a {
-  text-decoration: none;
-  font-size: 16px;
-  color: rgba(102, 102, 102)
-}
 
 .divider {
   height: 1px;
@@ -123,21 +114,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.stat {
-  text-align: center;
-}
-
-.stat h3 {
-  margin: 0;
-  font-size: 24px;
-  color: rgb(51, 51, 51);
-}
-
-.stat p {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: rgb(102, 102, 102);
-}
 
 .wrap-text {
   word-break: break-word;

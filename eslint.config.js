@@ -1,32 +1,32 @@
-import { createRequire } from 'node:module';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const require = createRequire(import.meta.url);
+const require = createRequire(import.meta.url)
 
-const globals = require('globals');
-const tseslint = require('typescript-eslint');
-const tsParser = require('@typescript-eslint/parser');
-const simpleImportSort = require('eslint-plugin-simple-import-sort');
+const globals = require('globals')
+const tseslint = require('typescript-eslint')
+const tsParser = require('@typescript-eslint/parser')
+const simpleImportSort = require('eslint-plugin-simple-import-sort')
 const neostandard = require('neostandard')
 
 export default tseslint.config(
   ...neostandard(),
   {
-    ignores: ['eslint.config.js', 'tsup.config.ts', 'resources/**/*'],
+    ignores: ['lib', 'tsup.config.ts', 'resources/**/*']
   },
   tseslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: "module",
+      sourceType: 'module',
       parser: tsParser,
       parserOptions: {
         project: './tsconfig.json',
-        tsconfigRootDir: path.resolve(fileURLToPath(import.meta.url).replace(/\\/g, '/'), '../'),
+        tsconfigRootDir: path.resolve(fileURLToPath(import.meta.url).replace(/\\/g, '/'), '../')
       },
-      globals: { ...globals.node },
+      globals: { ...globals.node }
     },
     plugins: {
       'simple-import-sort': simpleImportSort
@@ -63,8 +63,8 @@ export default tseslint.config(
           objects: 'never',
           imports: 'never',
           exports: 'never',
-          functions: 'never',
-        },
+          functions: 'never'
+        }
       ],
       'arrow-body-style': 'off',
       'space-before-function-paren': 1,
@@ -82,8 +82,8 @@ export default tseslint.config(
         1,
         {
           words: true,
-          nonwords: false,
-        },
+          nonwords: false
+        }
       ],
       'space-before-blocks': [1, 'always'],
       'space-in-parens': [1, 'never'],
@@ -94,12 +94,12 @@ export default tseslint.config(
           after: true,
           overrides: {
             if: {
-              after: true,
-            },
-          },
-        },
+              after: true
+            }
+          }
+        }
       ],
-      'brace-style': [1, '1tbs'],
-    },
+      'brace-style': [1, '1tbs']
+    }
   }
-);
+)

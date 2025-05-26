@@ -1,8 +1,6 @@
 import { db } from '@/models'
 type Model = db.base.Model
 export interface githubType extends Model {
-  /** 主键id */
-  id: number
   /** 机器人Id */
   botId: string
   /** 用户id */

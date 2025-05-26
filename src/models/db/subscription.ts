@@ -3,12 +3,6 @@ import { dbType } from '@/types'
 type Model = dbType['subscription']
 
 export const table = sequelize.define('subscription', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    comment: '主键ID'
-  },
   platform: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -26,7 +20,7 @@ export const table = sequelize.define('subscription', {
   },
   branch: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
     comment: '仓库分支'
   },
   event: {

@@ -5,18 +5,8 @@ href="{{_res_path}}/repo/css/get_repo_info.css"
 rel="stylesheet" 
 type="text/css" 
 />
-<link
-href="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.css"
-rel="stylesheet"
-type="text/css"
-/>
-{{/block}}
-{{block 'scripts'}}
-<script src="https://cdn.jsdmirror.com/npm/language-colors@1.94.0/language-colors.js"></script>
-<script src="{{_res_path}}/repo/js/language-colors.js"></script>
 {{/block}}
 {{block 'main'}}
-
 <div class="card">
   <div class="header">
     {{if platform === 'github'}}
@@ -30,13 +20,13 @@ type="text/css"
     {{/if}}
 
     {{if platform === 'github'}}
-    <h2>GitHub 用户仓库列表</h2>
+    <h2>GitHub 仓库信息</h2>
     {{else if platform === 'gitee'}}
-    <h2>Gitee 用户仓库列表</h2>
+    <h2>Gitee 仓库信息</h2>
     {{else if platform === 'gitcode'}}
-    <h2>GitCode 用户仓库列表</h2>
+    <h2>GitCode 仓库信息</h2>
     {{else}}
-    <h2>GitHub 用户仓库列表</h2>
+    <h2>GitHub 仓库信息</h2>
     {{/if}}
 
   </div>
@@ -55,7 +45,7 @@ type="text/css"
       </span>
     </div>
 
-    <div class="info-label">仓库语言：</div>
+    <div class="info-label" style="--language-color: {{ language_color }}">仓库语言：</div>
     <div class="info-value">
       <span class="repo-language">{{ language }}</span>
     </div>

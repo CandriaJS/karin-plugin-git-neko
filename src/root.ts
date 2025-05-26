@@ -11,6 +11,8 @@ const basename = path.basename(dirPath)
 
 const pkg = requireFileSync(`${dirPath}/package.json`)
 
+export const isPackaged = Object.freeze(dirPath.includes('node_modules'))
+
 const Version:VersionType = {
   /** 当前Bot名称 */
   get Bot_Name () {
@@ -30,11 +32,11 @@ const Version:VersionType = {
   },
   /** 插件包名称 */
   get Plugin_Name () {
-    return basename
+    return (isPackaged || process.env.NODE_ENV === 'development') ? pkg.name : basename
   },
   /** 插件包别名 */
   get Plugin_AliasName () {
-    return '清语Git插件'
+    return '柠糖码猫'
   },
   /** 插件包版本 */
   get Plugin_Version () {
