@@ -1,6 +1,4 @@
 # GitHub 配置
-# Github Apps 的APPID
-APPID:
 # Github Apps 的PrivateKey
 PrivateKey:
 # Github Apps 的ClientID
