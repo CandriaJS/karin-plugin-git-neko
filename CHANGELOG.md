@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.1...v0.1.2) (2025-05-27)
+
+
+### ⚡️ 性能优化
+
+* **user:** 优化用户信息接口 ([7071e8a](https://github.com/CandriaJS/karin-plugin-git-neko/commit/7071e8a073a74af28a4a64d5bb8c9e1d01c14acb))
+
 ## [0.1.1](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.0...v0.1.1) (2025-05-27)
 
 
