@@ -17,15 +17,15 @@ AuthRouter.get('/', async (req: Request, res: Response) => {
 
   try {
     const stateId = req.query.state as string
-    const token = await auth.get_token_by_code({ code })
-    const access_token = token.data.access_token
+    const AccessTokenInfo = await auth.get_token_by_code({ code })
+    const access_token = AccessTokenInfo.data.access_token
     if (!access_token) throw new Error('获取授权令牌失败')
-    const user = await gh.get_user()
     gh.setToken(access_token)
+    const user = await gh.get_user()
     const username = await user.get_username()
-    const expires_in = token.data.expires_in
-    const refresh_token = token.data.refresh_token as string
-    const refresh_token_expires_in = token.data.refresh_token_expires_in as number
+    const expires_in = AccessTokenInfo.data.expires_in as number
+    const refresh_token = AccessTokenInfo.data.refresh_token as string
+    const refresh_token_expires_in = AccessTokenInfo.data.refresh_token_expires_in as number
     const userInfo = await base.get_user(stateId)
     const userId = userInfo?.userId
     const botId = userInfo?.botId

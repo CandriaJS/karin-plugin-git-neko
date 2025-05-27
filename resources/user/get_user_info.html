@@ -40,20 +40,12 @@ type="text/css"
       {{if bio }}
       <p class="bio">简介: {{ bio }}</p>
       {{/if}}
+      {{ if email }}
+      <p class="email">邮箱: {{ email }}</p>
+      {{/if}}
     </div>
   </div>
 
-  <div class="divider"></div>
-
-  <div class="info-section">
-    <h2 class="emoji">📄 基本资料</h2>
-    <div class="info-grid">
-      <div class="grid-row">
-        <div class="grid-item"><span class="emoji">📧 邮箱：</span><span class="wrap-text">{{ email }}</span></div>
-        <div class="grid-item"><span class="emoji">🏢 公司：</span><span class="wrap-text">{{ company }}</span></div>
-      </div>
-    </div>
-  </div>
 
   <div class="divider"></div>
 
@@ -110,6 +102,10 @@ type="text/css"
     <h2 class="emoji">📊 数据概览</h2>
     <div class="stats">
       <div class="stat-container">
+        <div class="stat">
+          <h3>{{ repos_count }}</h3>
+          <p class="emoji">📦 公开仓库数量</p>
+        </div>
       </div>
       <div class="stat-container">
         <div class="stat">

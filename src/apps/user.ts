@@ -44,8 +44,8 @@ export const get_user_info = karin.command(
           avatar: user_info.data.avatar_url,
           bio: user_info.data.bio,
           email: user_info.data.email ?? '未公开或未知',
-          company: user_info.data.company ?? '未公开或未知',
           blog: user_info.data.blog ?? '未公开或未知',
+          repos_count: user_info.data.public_repos,
           followers_count: user_info.data.followers,
           following_count: user_info.data.following,
           contribution_data: contribution.data
