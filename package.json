@@ -1,6 +1,6 @@
 {
   "name": "@candriajs/karin-plugin-git-neko",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "关于一个Karin插件, 主要提供在BOT上对Github, Gitee, GitCode等Git平台操作",
   "keywords": [
     "karin-plugin",
