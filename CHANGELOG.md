@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.0...v0.1.1) (2025-05-27)
+
+
+### 🐛 错误修复
+
+* 授权异常 ([98a5b59](https://github.com/CandriaJS/karin-plugin-git-neko/commit/98a5b5976c3ac9f6361b060c921271709fffcdc0))
+
+
+### ♻️ 代码重构
+
+* **config:** 移除 沉余配置 ([fbaa836](https://github.com/CandriaJS/karin-plugin-git-neko/commit/fbaa8366562ce07dc11c32a13d05bcd2563cb423))
+
 ## [0.1.0](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.0.1...v0.1.0) (2025-05-27)
 
 
