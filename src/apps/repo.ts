@@ -7,7 +7,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const get_repo_info = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:仓库|repo)(?:信息|info)\s*([\w-]+)[\/\s]+([\w-]+)/i,
+  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:仓库|repo)(?:信息|info)(?:\s*([\w-]+)[\/\s]+([\w-]+))?$/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')
@@ -20,9 +20,9 @@ export const get_repo_info = karin.command(
       const userId = e.userId
       const groupId = e.groupId
       const bind_info = await utils.get_bind(platform, botId, userId, groupId)
-      if (!(owner || repo) && bind_info) {
-        if (!bind_info.owner || !bind_info.repo) {
-          throw new Error('喵呜~ ,请先使用 #GitHub仓库绑定 命令绑定仓库')
+      if (!owner && !repo) {
+        if (!bind_info?.owner || !bind_info?.repo) {
+          throw new Error('喵呜~ ,请先使用 #GitHub仓库绑定 命令绑定仓库或直接指定仓库信息')
         }
         owner = bind_info.owner
         repo = bind_info.repo
@@ -38,7 +38,8 @@ export const get_repo_info = karin.command(
           platform,
           owner: repo_info.data.owner?.login ?? '未知',
           repo: repo_info.data.name ?? '未知',
-          visibility: repo_info.data.private,
+          visibility: repo_info.data.visibility,
+          archived: repo_info.data.archived,
           language: repo_info.data.language ?? '未知',
           language_color: repo_info.data.language ? get_langage_color(repo_info.data.language.toLowerCase()) : '#ededed',
           description: repo_info.data.description ?? '无描述',
@@ -81,7 +82,8 @@ export const get_org_repos_list = karin.command(
       const org_repos_list = await repo.get_org_repos_list({ org })
       const repo_list = org_repos_list.data.map(repo => ({
         name: repo.name,
-        visibility: repo.private,
+        visibility: repo.visibility,
+        archived: repo.archived,
         language: repo.language ?? '未知',
         language_color: repo.language ? get_langage_color(repo.language.toLowerCase()) : '#ededed',
         star_count: repo.stargazers_count ?? 0,
@@ -138,7 +140,8 @@ export const get_user_repos_list = karin.command(
       }
       repo_list = repo_list.data.map(repo => ({
         name: repo.name,
-        visibility: repo.private,
+        visibility: repo.visibility,
+        archived: repo.archived,
         language: repo.language ?? '未知',
         language_color: repo.language ? get_langage_color(repo.language.toLowerCase()) : '#ededed',
         star_count: repo.stargazers_count ?? '未知',
