@@ -1,5 +1,5 @@
 import { get_langage_color } from '@candriajs/git-neko-kit'
-import karin, { logger, Message } from 'node-karin'
+import karin, { Elements, logger, Message, TextElement } from 'node-karin'
 
 import { Render } from '@/common'
 import { github, utils } from '@/models'
@@ -199,6 +199,29 @@ export const add_collaborator = karin.command(
         return null
       }
 
+      const getquotedUserName = async (e: Message): Promise<string | null> => {
+        let source = null
+        let MsgId: string | null = null
+
+        if (e.replyId) {
+          MsgId = (await e.bot.getMsg(e.contact, e.replyId)).messageId ?? null
+        } else {
+          MsgId = e.elements.find((m) => m.type === 'reply')?.messageId ?? null
+        }
+        if (MsgId) {
+          source = (await e.bot.getHistoryMsg(e.contact, MsgId, 2))?.[0] ?? null
+        }
+        if (source) {
+          const sourceArray = Array.isArray(source) ? source : [source]
+          return sourceArray.flatMap(({ elements }) =>
+            elements
+              .filter((element: Elements) => element.type === 'text')
+              .map((element: TextElement) => element.text)
+          )[0]
+        }
+        return null
+      }
+
       const target_id = e.at[0] ?? await getquotedUser(e)
       const userInfo = await utils.get_user_info(botId, userId)
       const bind_info = await utils.get_bind(platform, botId, userId, groupId)
@@ -209,15 +232,21 @@ export const add_collaborator = karin.command(
           throw new Error('喵呜~ ,请先使用 #GitHub仓库绑定 命令绑定仓库')
         }
         if (!target_id) {
-          throw new Error('喵呜~, 请艾特要邀请的用户')
-        }
-        const target_user_info = await utils.get_user_info(botId, target_id)
-        if (!target_user_info || !target_user_info.github_username) {
-          throw new Error('喵呜~, 该用户未绑定用户名')
+          const quotedUserName = await getquotedUserName(e)
+          if (quotedUserName) {
+            username = quotedUserName.trim()
+          } else {
+            throw new Error('喵呜~, 请艾特要邀请的用户或在引用消息中提供 GitHub 用户名')
+          }
+        } else {
+          const target_user_info = await utils.get_user_info(botId, target_id)
+          if (!target_user_info || !target_user_info.github_username) {
+            throw new Error('喵呜~, 该用户未绑定用户名')
+          }
+          username = target_user_info.github_username
         }
         owner = bind_info.owner
         repo = bind_info.repo
-        username = target_user_info.github_username
       }
       permission = permission ?? 'pull'
       const repo_obj = await gh.get_repo()
