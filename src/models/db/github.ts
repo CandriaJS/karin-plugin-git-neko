@@ -23,7 +23,7 @@ export const table = sequelize.define('github', {
   },
   access_token: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     comment: '用户Token'
   },
   expires_in: {
