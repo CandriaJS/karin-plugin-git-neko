@@ -36,20 +36,20 @@ export const get_repo_info = karin.command(
         'repo/get_repo_info',
         {
           platform,
-          owner: repo_info.data.owner?.login ?? '未知',
-          repo: repo_info.data.name ?? '未知',
+          owner: repo_info.data.owner.login,
+          repo: repo_info.data.name,
           visibility: repo_info.data.visibility,
           archived: repo_info.data.archived,
           language: repo_info.data.language ?? '未知',
           language_color: repo_info.data.language ? get_langage_color(repo_info.data.language.toLowerCase()) : '#ededed',
           description: repo_info.data.description ?? '无描述',
-          url: repo_info.data.html_url ?? '未知',
-          created_at: repo_info.data.created_at ?? '未知',
-          updated_at: repo_info.data.updated_at ?? '未知',
-          pushed_at: repo_info.data.pushed_at ?? '未知',
-          star_count: repo_info.data.stargazers_count ?? '未知',
-          fork_count: repo_info.data.forks_count ?? '未知',
-          issue_count: repo_info.data.open_issues_count ?? '未知'
+          url: repo_info.data.html_url,
+          created_at: repo_info.data.created_at,
+          updated_at: repo_info.data.updated_at,
+          pushed_at: repo_info.data.pushed_at,
+          star_count: repo_info.data.stargazers_count,
+          fork_count: repo_info.data.forks_count,
+          issue_count: repo_info.data.open_issues_count
         }
       )
       await e.reply(img)
@@ -144,10 +144,10 @@ export const get_user_repos_list = karin.command(
         archived: repo.archived,
         language: repo.language ?? '未知',
         language_color: repo.language ? get_langage_color(repo.language.toLowerCase()) : '#ededed',
-        star_count: repo.stargazers_count ?? '未知',
-        created_at: repo.created_at ?? '未知',
-        updated_at: repo.updated_at ?? '未知',
-        pushed_at: repo.pushed_at ?? '未知'
+        star_count: repo.stargazers_count,
+        created_at: repo.created_at,
+        updated_at: repo.updated_at,
+        pushed_at: repo.pushed_at
       }))
       const img = await Render.render(
         'repo/get_user_repos_list',
