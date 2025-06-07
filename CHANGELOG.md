@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.2.0](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.2...v0.2.0) (2025-06-07)
+
+
+### ✨ 新功能
+
+* **repo:** 添加获取引用消息文本的功能以邀请协作者 ([2c6cdf1](https://github.com/CandriaJS/karin-plugin-git-neko/commit/2c6cdf115677feb8cc5b70376c262fae7d82e1fe))
+
+
+### 🐛 错误修复
+
+* update ([3255f3a](https://github.com/CandriaJS/karin-plugin-git-neko/commit/3255f3a862e8f239fd87c1d92435a0e353244fa6))
+
+
+### ♻️ 代码重构
+
+* **repo:** 优化仓库信息展示和查询逻辑 ([a33bed2](https://github.com/CandriaJS/karin-plugin-git-neko/commit/a33bed21565ccd702ed6a374303e064041702247))
+* **repo:** 优化仓库信息展示和查询逻辑 ([5444e89](https://github.com/CandriaJS/karin-plugin-git-neko/commit/5444e898307350771fcf8312f960752378143ac3))
+
+
+### 🎡 持续集成
+
+* 更新 bug 报告模板 ([e114486](https://github.com/CandriaJS/karin-plugin-git-neko/commit/e114486638d3eaf4b7813a84dcdd001632671b4f))
+
 ## [0.1.2](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.1...v0.1.2) (2025-05-27)
 
 
