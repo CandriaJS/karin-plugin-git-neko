@@ -30,13 +30,12 @@ async function updateGitRepository (force: boolean, pluginPath: string) {
   }
 }
 
-export const update = karin.command(/^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:(强制|预览版))?更新$/i, async (e: Message) => {
+export const update = karin.command(/^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)(?:强制)?更新$/i, async (e: Message) => {
   let status: 'ok' | 'failed' | 'error' = 'failed'
   let data: ExecException | string = ''
 
   if (isPackaged) {
-    const version = e.msg.includes('预览版') ? 'beta' : 'latest'
-    const result = await updateNpmPackage(version, Version.Plugin_Name)
+    const result = await updateNpmPackage('latest', Version.Plugin_Name)
     data = result.data
     status = result.status
   } else {
