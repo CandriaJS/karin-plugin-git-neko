@@ -85,11 +85,11 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         branch = req.body.ref.replace('refs/heads/', '').trim()
         const sha = req.body.head_commit.id.slice(0, 7)
         const commit = await gh.get_commit()
-        const commit_info = await commit.get_commit_info({ owner, repo, sha, format: true })
+        const commit_info = await commit.get_commit_info({ owner, repo, sha })
         const commit_date = await get_relative_time((commit_info.data.commit.committer).date)
         const md = new MarkdownIt({ html: true })
         const commit_title = md.render(commit_info.data.commit.title as string)
-        const commit_body = md.render(commit_info.data.commit.body as string)
+        const commit_body = md.render(commit_info.data.commit.body ?? '')
         img = await Render.render(
           'commit/get_commit_info',
           {

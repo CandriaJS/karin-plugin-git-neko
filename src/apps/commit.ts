@@ -1,5 +1,6 @@
 import { get_relative_time } from '@candriajs/git-neko-kit'
 import MarkdownIt from 'markdown-it'
+import { full as emoji } from 'markdown-it-emoji'
 import karin, { logger, Message } from 'node-karin'
 
 import { Render } from '@/common'
@@ -9,7 +10,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const get_commit_info = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:最新)?(?:提交|commit)(?:信息|info)\s*([\w-]+)[\/\s]+([\w-]+)(?:\s+([\w-]+))?/i,
+  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:最新)?(?:提交|commit)(?:信息|info)(?:(?:\s*([\w-]+)(?:[\/\s]+([\w-]+))?)?)?(?:\s+([\w-]+))?/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')
@@ -40,10 +41,11 @@ export const get_commit_info = karin.command(
       if (access_token) gh.setToken(access_token)
       const commit = await gh.get_commit()
       const repo_obj = await gh.get_repo()
-      const commit_info = await commit.get_commit_info({ owner, repo, sha, format: true })
+      const commit_info = await commit.get_commit_info({ owner, repo, sha })
       const visibility = await repo_obj.get_repo_visibility({ owner, repo })
       const md = new MarkdownIt({ html: true })
-      const makdown = md.render(commit_info.data.commit.body as string)
+      md.use(emoji)
+      const makdown = md.render(commit_info.data.commit.body ?? '')
       const img = await Render.render(
         'commit/get_commit_info',
         {

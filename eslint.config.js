@@ -13,7 +13,7 @@ const neostandard = require('neostandard')
 export default tseslint.config(
   ...neostandard(),
   {
-    ignores: ['lib', 'tsup.config.ts', 'resources/**/*']
+    ignores: ['lib', 'tsup.config.ts', 'resources/**/*', 'eslint.config.js']
   },
   tseslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
