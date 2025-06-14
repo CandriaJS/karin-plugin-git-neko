@@ -1,5 +1,5 @@
 import { get_langage_color } from '@candriajs/git-neko-kit'
-import karin, { Elements, logger, Message, TextElement } from 'node-karin'
+import karin, { Elements, logger, Message, segment, TextElement } from 'node-karin'
 
 import { Render } from '@/common'
 import { github, utils } from '@/models'
@@ -169,7 +169,7 @@ export const get_user_repos_list = karin.command(
     permission: 'all'
   })
 export const add_collaborator = karin.command(
-  /^#?(?:(?:柠糖)?码猫插件|karin-plugin-git-neko)?GitHub(?:仓库|repo)(?:((邀请|invit)|(添加|add)))(?:\s*([\w-]+))?(?:[\/\s]+([\w-]+))?(?:\s*([\w-]+))?(?:\s*([\w-]+))?/i,
+  /^#?(?:(?:柠糖)?码猫插件|karin-plugin-git-neko)?GitHub(?:仓库|repo)(?:邀请|invite|add|添加)(?:\s*([\w-]+))?(?:[\/\s]+([\w-]+))?(?:\s*([\w-]+))?(?:\s*([\w-]+))?/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')
@@ -180,7 +180,7 @@ export const add_collaborator = karin.command(
       const userId = e.userId
       const botId = e.selfId
       const groupId = e.groupId
-      const getquotedUser = async (e: Message): Promise<string | null> => {
+      const get_quoted_user = async (e: Message): Promise<string | null> => {
         let source = null
         let MsgId: string | null = null
 
@@ -199,7 +199,7 @@ export const add_collaborator = karin.command(
         return null
       }
 
-      const getquotedUserName = async (e: Message): Promise<string | null> => {
+      const get_quoted_username = async (e: Message): Promise<string | null> => {
         let source = null
         let MsgId: string | null = null
 
@@ -222,31 +222,32 @@ export const add_collaborator = karin.command(
         return null
       }
 
-      const target_id = e.at[0] ?? await getquotedUser(e)
+      const target_id = e.at[0] ?? await get_quoted_user(e)
       const userInfo = await utils.get_user_info(botId, userId)
       const bind_info = await utils.get_bind(platform, botId, userId, groupId)
       const access_token = userInfo?.access_token
       if (access_token) gh.setToken(access_token)
-      if (!owner || !repo || !username) {
+      if (!owner || !repo) {
         if (!bind_info) {
           throw new Error('喵呜~ ,请先使用 #GitHub仓库绑定 命令绑定仓库')
         }
-        if (!target_id) {
-          const quotedUserName = await getquotedUserName(e)
-          if (quotedUserName) {
-            username = quotedUserName.trim()
-          } else {
-            throw new Error('喵呜~, 请艾特要邀请的用户或在引用消息中提供 GitHub 用户名')
-          }
-        } else {
+        owner = bind_info.owner
+        repo = bind_info.repo
+      }
+
+      if (!username) {
+        const quotedMessage = await get_quoted_username(e)
+        if (quotedMessage) {
+          username = quotedMessage.trim()
+        } else if (target_id) {
           const target_user_info = await utils.get_user_info(botId, target_id)
           if (!target_user_info || !target_user_info.github_username) {
             throw new Error('喵呜~, 该用户未绑定用户名')
           }
           username = target_user_info.github_username
+        } else {
+          throw new Error('喵呜~, 请引用包含用户名的消息或艾特要邀请的用户')
         }
-        owner = bind_info.owner
-        repo = bind_info.repo
       }
       permission = permission ?? 'pull'
       const repo_obj = await gh.get_repo()
@@ -255,7 +256,13 @@ export const add_collaborator = karin.command(
       const user_info = await user.get_user_info({ username })
       const nickname = user_info.data.name ?? '未知'
       const repo_url = collaborator_info.data.html_url.replace(/\/$/, '')
-      const msg = `喵呜~ 已成功邀请 ${username}\n邀请信息:\n用户名: ${user_info.data.login}\n昵称: ${nickname}\n邀请地址: ${repo_url}/invitations\n仓库地址: ${repo_url}`
+      const msg = segment.text([
+        '🎉 邀请信息:',
+        `👤 用户名: ${user_info.data.login}`,
+        `🏷️ 昵称: ${nickname}`,
+        `🔗 邀请地址: ${repo_url}/invitations`,
+        `📦 仓库地址: ${repo_url}`
+      ].join(' \n '))
       await e.reply(msg)
       return true
     } catch (error) {
