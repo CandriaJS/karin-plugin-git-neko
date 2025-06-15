@@ -35,14 +35,20 @@ type="text/css"
   <div class="user-profile">
     <img class="user-avatar" src="{{ avatar }}" alt="用户头像">
     <div class="user-info">
-      <h1>{{ name }}</h1>
-      <p class="username">@{{ username }}</p>
-      {{if bio }}
-      <p class="bio">简介: {{ bio }}</p>
-      {{/if}}
-      {{ if email }}
-      <p class="email">邮箱: {{ email }}</p>
-      {{/if}}
+      <div class="left-column">
+        <h1>{{ name }}</h1>
+        {{if username}}
+        <p class="username">@{{ username }}</p>
+        {{/if}}
+        {{ if email }}
+        <p class="email">邮箱: {{ email }}</p>
+        {{/if}}
+      </div>
+      <div class="right-column">
+        {{if bio }}
+        <p class="bio">简介: {{ bio }}</p>
+        {{/if}}
+      </div>
     </div>
   </div>
 

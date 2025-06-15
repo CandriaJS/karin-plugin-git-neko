@@ -7,3 +7,6 @@ ClientID:
 ClientSecret:
 # GitHub Apps 的WebhookSecret
 WebhookSecret:
+# Github 访问令牌
+# https://github.com/settings/tokens/new
+access_token:

@@ -6,7 +6,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const auth_install = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(GitHub)(Auth|授权)(安装|install)$/i,
+  /^#?(?:柠糖码猫)?(GitHub)(Auth|授权)(安装|install)$/i,
   async (e: Message) => {
     try {
       if (e.isGroup) {
@@ -33,7 +33,7 @@ export const auth_install = karin.command(
   })
 
 export const auth_check = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(GitHub)(Auth|授权)(检查|check)$/i,
+  /^#?(?:柠糖码猫)?(GitHub)(Auth|授权)(检查|check)$/i,
   async (e: Message) => {
     try {
       const botId = e.selfId

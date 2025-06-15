@@ -4,7 +4,7 @@ import { base } from '@/models'
 import { Version } from '@/root'
 
 export const app_install = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(GitHub)(应用|Apps)(安装|install)$/i,
+  /^#?(?:柠糖码猫)?(GitHub)(应用|Apps)(安装|install)$/i,
   async (e: Message) => {
     try {
       if (e.isGroup) {

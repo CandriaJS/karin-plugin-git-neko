@@ -1,10 +1,20 @@
-import axios from 'node-karin/axios'
+import axios from '@candriajs/git-neko-kit/axios'
 
+import { get_md_render } from '@/models/base/common'
+
+/**
+ * 渲染markdown
+ * @param  markdown markdown文本
+ * @returns  渲染后的HTML文本
+ */
+export async function render_markdown (markdown: string): Promise<string> {
+  return (await get_md_render()).render(markdown)
+}
 /**
  * 获取远程ip地址
  * @returns {Promise<string>} 远程IP
  */
-const getRemoteIP = async () => {
+const get_remote_ip = async (): Promise<string> => {
   const urls = [
     'https://blog.cloudflare.com/cdn-cgi/trace',
     'https://developers.cloudflare.com/cdn-cgi/trace',
@@ -30,6 +40,6 @@ const getRemoteIP = async () => {
  */
 export async function get_base_url (): Promise<string> {
   const prefix = 'http://'
-  const remote_url = `${prefix}${await getRemoteIP()}:${process.env.HTTP_PORT}/git`
+  const remote_url = `${prefix}${await get_remote_ip()}:${process.env.HTTP_PORT}/git`
   return remote_url
 }

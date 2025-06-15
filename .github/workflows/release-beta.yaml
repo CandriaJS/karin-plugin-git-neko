@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - '!release-please*'
   pull_request_target:
     types:
       - opened
@@ -64,7 +65,7 @@ jobs:
           echo "BETA_VERSION=$BETA_VERSION" >> $GITHUB_ENV
           echo "BETA_VERSION=$BETA_VERSION" >> $GITHUB_OUTPUT
           echo "生成的 Beta 版本号: $BETA_VERSION"
-
+          
       - name: 获取分支的最新提交哈希
         id: get-sha
         run: |
@@ -95,8 +96,8 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
           ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
 
       - name: 获取token
         uses: actions/create-github-app-token@v2
@@ -112,6 +113,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
+
       - name: 设置 pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -126,17 +128,22 @@ jobs:
           pnpm pkg set version="${{ needs.beta-version.outputs.beta_version }}"
           mkdir -p ${{ runner.temp }}/temp/
           cp -r package.json CHANGELOG.md README.md LICENSE resources config lib ${{ runner.temp }}/temp/
-
+      
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
           name: ${{ needs.beta-version.outputs.package_short_name }}
           path: ${{ runner.temp }}/temp/
 
+      - name: 获取主分支的最新提交消息
+        id: commit-message
+        run: |
+          echo "commit_msg=$(git log origin/${{ github.event.pull_request.head.ref || github.ref_name }} -1 --pretty=format:'%s')" >> $GITHUB_ENV
+
       - name: 发布预览版
         run: |
           pnpm dlx pkg-pr-new publish --json output.json --comment=off > pkg-output.txt 2>&1
-
+          
           echo "## 成功推送的Package包 :" >> $GITHUB_STEP_SUMMARY
           echo "包名: \`${{ needs.beta-version.outputs.package_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "版本号: \`${{ needs.beta-version.outputs.beta_version }}\`" >> $GITHUB_STEP_SUMMARY
@@ -169,7 +176,7 @@ jobs:
             ```
             pnpm add https://pkg.pr.new/${{ github.repository }}/${{ needs.beta-version.outputs.package_name }}@${{ needs.beta-version.outputs.short_commit_hash }} -w
             ```
-
+            
       - name: 上传NPM包信息
         uses: actions/upload-artifact@v4
         with:

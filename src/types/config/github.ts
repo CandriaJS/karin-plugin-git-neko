@@ -7,4 +7,6 @@ export interface githubType {
   ClientSecret: string,
   /** GitHub WebhookSecret */
   WebhookSecret: string,
+  /** GitHUb 访问令牌 */
+  access_token: string
 }

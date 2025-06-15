@@ -33,17 +33,28 @@ type="text/css"
 
   </div>
 
+  <div class="repo-count">
+    该组织下共有 {{repo_list.length}} 个仓库
+  </div>
+
   <div class="repo-list">
     {{each repo_list repo}}
-    <div class="repo-item">
-      <span class="repo-name">{{repo.name}}</span>
-      <span class="repo-visibility {{repo.visibility === 'private' ? 'private' : 'public'}} {{repo.archived ? 'archived' : ''}}">
-        {{repo.visibility === 'private' ? '私有' : '公开'}}{{repo.archived ? '存档' : ''}}
-      </span>
-      <div class="repo-meta" style="--language-color: {{repo.language_color}}">
-        <span class="repo-language">{{repo.language}}</span>
-        <span class="repo-stars">⭐{{repo.star_count}}</span>
-        <span class="repo-pushed">最后推送时间: {{repo.pushed_at}}</span>
+    <div class="repo-card">
+      <div class="repo-item">
+        <div class="repo-header">
+          <span class="repo-name">{{repo.name}}</span>
+          <span class="repo-visibility {{repo.visibility === 'private' ? 'private' : 'public'}} {{repo.archived ? 'archived' : ''}}">
+            {{repo.visibility === 'private' ? '私有' : '公开'}}{{repo.archived ? '存档' : ''}}
+          </span>
+        </div>
+        {{if repo.description}}
+        <span class="repo-description">{{repo.description}}</span>
+        {{/if}}
+        <div class="repo-meta" style="--language-color: {{repo.language_color}}">
+          <span class="repo-language">{{repo.language}}</span>
+          <span class="repo-stars">⭐{{repo.star_count}}</span>
+          <span class="repo-pushed">最后推送时间: {{repo.pushed_at}}</span>
+        </div>
       </div>
     </div>
     {{/each}}

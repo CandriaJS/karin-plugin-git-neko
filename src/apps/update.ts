@@ -30,7 +30,7 @@ async function updateGitRepository (force: boolean, pluginPath: string) {
   }
 }
 
-export const update = karin.command(/^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)(?:强制)?更新$/i, async (e: Message) => {
+export const update = karin.command(/^#?(?:柠糖码猫)(?:强制)?更新$/i, async (e: Message) => {
   let status: 'ok' | 'failed' | 'error' = 'failed'
   let data: ExecException | string = ''
 

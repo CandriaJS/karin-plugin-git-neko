@@ -6,7 +6,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const subscription = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:仓库|repo)(?:订阅|subscription)\s*([\w-]+)[\/\s]+([\w-]+)(?:\s+([\w-]+))?/i,
+  /^#?(?:柠糖码猫)?(?:GitHub)(?:仓库|repo)(?:订阅|subscription)\s*([\w-]+)[\/\s]+([\w-]+)(?:\s+([\w-]+))?/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')

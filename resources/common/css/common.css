@@ -1,16 +1,21 @@
 @font-face {
   font-family: "Number";
-  src: url("../font/TTTGB-Number.woff") format("woff");
+  src: url("https://static.wuliya.cn/static/font/TTTGB-Number.woff") format("woff");
   font-display: swap
 }
 @font-face {
   font-family: "YS";
-  src: url("../font/HYWH.woff") format("woff");
+  src: url("https://static.wuliya.cn/static/font/HYWH.woff") format("woff");
   font-display: swap
 }
 @font-face {
   font-family: "Helvetica";
-  src: url("../font/HELVETI.woff") format("woff");
+  src: url("https://static.wuliya.cn/static/font/HELVETI.woff") format("woff");
+  font-display: swap
+}
+@font-face {
+  font-family: "NotoColorEmoji";
+  src: url("https://static.wuliya.cn/static/font/NotoColorEmoji-Regular.ttf") format("truetype");
   font-display: swap
 }
 
@@ -25,13 +30,13 @@
 
 body {
   color: #1e1f20;
-  font-family: Number, "汉仪文黑-65W", YS, PingFangSC-Medium, "PingFang SC", sans-serif;
+  font-family: Number, YS, PingFangSC-Medium, NotoColorEmoji, sans-serif;
   transform-origin: 0 0;
-  width: 1440px;
+  width: 100%;
 }
 
 .container {
-  width: 1440px;
+  width: 1800px;
   padding: 20px 15px 10px 15px;
   background-size: contain;
 }
@@ -57,12 +62,6 @@ body {
   margin-left: 10px;
 }
 
-.head-box .genshin_logo {
-  position: absolute;
-  top: 1px;
-  right: 15px;
-  width: 97px;
-}
 
 .head-box .label {
   font-size: 16px;
@@ -74,19 +73,6 @@ body {
   padding: 0 2px;
 }
 
-.notice {
-  color: #888;
-  font-size: 12px;
-  text-align: right;
-  padding: 12px 5px 5px;
-}
-
-.notice-center {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 10px;
-  text-shadow: 1px 1px 1px #333;
-}
 
 .copyright {
   font-size: 15px;

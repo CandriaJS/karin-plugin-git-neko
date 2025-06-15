@@ -1,137 +1,104 @@
 body {
-  width: 100%; 
- }
- 
- .card {
-   background-color: rgb(255, 255, 255);
-   border-radius: 10px;
-   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-   width: 90%;
-   padding: 40px;
-   margin: 0 auto;
-   transition: transform 0.3s ease;
- }
- .card .header {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   gap: 10px;
-   margin-bottom: 20px;
- }
- 
- .card .header h2 {
-   font-size: 36px;
-   font-weight: 600;
-   color: rgb(34, 34, 34);
- }
- 
- .info-section {
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-   max-width: 100%;
- }
- 
- .issue-card {
-  width: 100%;
+  min-width: 800px;
+  max-width: 1200px;
 }
 
- .repo-header {
-   display: flex;
-   align-items: center;
-   gap: 10px;
-   width: 100%;
- }
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  width: 90%;
+  padding: 32px;
+  margin: 20px auto;
+  transition: all 0.3s ease;
+}
 
- .platform-icon img {
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card .header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+}
+
+.repo-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.platform-icon img {
   width: 34px;
   height: 34px;
 }
- 
- .repo-info {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   gap: 10px;
-   width: 100%;
- }
 
- .counts-container {
-   display: flex;
-   align-items: center;
-   gap: 8px;
-   margin-left: auto;
- }
+.repo-info {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  justify-content: space-between; 
+  width: 100%;
+  gap: 10px;
+}
 
- .fork_count, .star_count {
-   display: flex;
-   align-items: center;
-   gap: 4px;
- }
-
- .fork_count img, .star_count img {
-   width: 20px;
-   height: 20px;
- }
-
- .fork_count span, .star_count span {
-   font-size: 20px;
-   color: rgb(34, 34, 34);
- }
-
- .repo-visibility {
-  display: inline-flex;
-  align-items: center; 
-  justify-content: center; 
-  margin-left: 5px;
-  padding: 10px 20px;
-  margin-bottom: 5px;
-  border-radius: 30px;
-  font-size: 15px;
+.issue-number {
+  color: rgb(101, 109, 118);
+  font-size: 20px;
   font-weight: 500;
-  line-height: 1;
-}
-
-.repo-visibility.public {
-  background-color: rgb(230, 247, 230); 
-  color: rgb(44, 151, 75);
-  border: 1px solid rgb(44, 151, 75);
-}
-
-.repo-visibility.private {
-  background-color: rgb(255, 235, 235); 
-  color: rgb(203, 36, 49);
-  border: 1px solid rgb(203, 36, 49);
+  margin-left: auto; 
+  padding-right: 10px; 
 }
 
 .issue-info {
   margin-top: 20px;
-  border-radius: 15px;
-  border: 1px solid rgb(230, 230, 230);
-  background-color: rgba(240, 240, 240, 0.8);
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0;
 }
 
 .issue-title {
   font-size: 20px;
-  color: rgb(34, 34, 34);
-  padding: 15px 15px 10px;
-  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 20px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  border-radius: 12px 12px 0 0;
 }
 
 .issue-title h1 {
   margin: 0;
   font-size: 24px;
-}
-
-.issue-number {
-  color: rgb(101, 109, 118);
-  font-size: 26px;
-  font-weight: normal;
+  flex: 1;
+  color: rgb(34, 34, 34);
+  line-height: 1.4;
 }
 
 .issue-state {
@@ -150,64 +117,89 @@ body {
   border-radius: 50%;
 }
 
-
-.issue-body {
-  margin-top: 0;
-  padding: 15px;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
 .author-info {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 0;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .author-name {
   font-weight: 600;
   color: rgb(34, 34, 34);
+  font-size: 16px;
 }
 
-.avatar {
-  flex-shrink: 0;
+.avatar img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
 }
 
-.issue-content {
-  flex: 1; 
+.avatar img:hover {
+  transform: scale(1.05);
 }
 
- .avatar img {
-   width: 40px;
-   height: 40px;
-   border-radius: 50%;
-   border: 2px solid #fff;
-   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
- }
- 
- .issue-created-at {
-   color: rgb(136, 136, 136);
-   font-size: 14px;
- }
- 
- .state-badge {
-   display: inline-block;
-   padding: 10px 25px;
-   border-radius: 40px;
-   font-size: 20px;
-   font-weight: 500;
-   line-height: 1.2;
- }
- 
- .issue-state.open .state-badge {
-   background-color: rgb(44, 151, 75);
-   color: rgb(255, 235, 235);
-   }
-   
-   .issue-state.closed .state-badge {
-   background-color: rgb(130, 80, 223);
-   color: rgb(255, 235, 235);
-   }
+.issue-created-at {
+  color: rgb(136, 136, 136);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.issue-body {
+  padding: 24px 20px;
+  margin-top: 0;
+  background-color: #fff;
+  border-radius: 0 0 12px 12px;
+}
+.issue-body img { 
+  max-width: 100%;
+}
+
+.issue-body-content {
+  padding-left: 10px;
+  line-height: 1.6;
+  color: rgb(51, 51, 51);
+  font-size: 15px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.state-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.issue-state.open .state-badge {
+  background-color: rgb(44, 151, 75);
+  color: white;
+}
+
+.issue-state.closed .state-badge {
+  background-color: rgb(130, 80, 223);
+  color: white;
+}
+
+.issue-state:hover .state-badge {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

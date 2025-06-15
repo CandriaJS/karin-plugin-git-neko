@@ -1,5 +1,6 @@
 body {
- width: 100%; 
+  min-width: 800px;
+  max-width: 1200px; 
 }
 
 .card {
@@ -64,37 +65,10 @@ body {
   font-weight: bold;
 }
 
-
-.repo-visibility {
-  display: inline-flex;
-  align-items: center; 
-  justify-content: center; 
-  margin-left: 5px;
-  padding: 10px 20px;
-  margin-bottom: 5px;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.repo-visibility.public {
-  background-color: rgb(230, 247, 230); 
-  color: rgb(44, 151, 75);
-  border: 1px solid rgb(44, 151, 75);
-}
-
-.repo-visibility.private {
-  background-color: rgb(255, 235, 235); 
-  color: rgb(203, 36, 49);
-  border: 1px solid rgb(203, 36, 49);
-}
-
 .branch-info {
   display: flex;
   align-items: center;
   gap: 0px;
-  margin-top: -10px;
 }
 
 .branch-icon img{
@@ -103,7 +77,7 @@ body {
   margin-right: 5px;
 }
 
-.author-info {
+.avatar-info {
   background-color: rgba(180, 186, 237, 0.8);
   border-radius: 8px;
   padding: 12px 16px;
@@ -111,19 +85,58 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.author-avatar img {
-  width: 32px;
-  height: 32px;
+.avatar-group {
+  display: flex;
+  position: relative;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.author-avatar img,
+.committer-avatar img {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.8);
+  object-fit: cover;
+  background-color: #fff;
+  display: block;
+}
+
+.dual-avatars {
+  display: flex;
+  position: relative;
+  margin-right: 10px;
+  position: relative;
+}
+
+.author-info > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.committer-avatar {
+  margin-left: -12px;
+  z-index: 1;
+}
+
+.author-info .author-avatar img {
+  border: 2px solid rgba(255,255,255,0.8);
 }
 
 .time-info {
   color: #666;
   font-size: 14px;
-  margin-left: auto;
-  padding-left: 10px;
+  margin-left: auto; 
+  padding-left: 10px;    
+  white-space: nowrap;    
+  flex-shrink: 0;
+  order: 1;            
 }
 
 .commit-icon img{
@@ -142,14 +155,34 @@ body {
 .commit-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+.commit-title > span:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 15px;
 }
 
 .code-changes {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-shrink: 0;
+  gap: 12px;
   margin-left: auto;
+  padding-right: 10px; 
+  padding-left: 15px;
+  white-space: nowrap;
+}
+
+.code-changes span {
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .changes-added {
@@ -176,6 +209,6 @@ body {
 }
 
 .commit-content {
-  padding: 12px;
+  padding-left: 20px;
   white-space: pre-line;
 }
