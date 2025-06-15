@@ -1,34 +1,30 @@
-<html
->
+<html>
   <head>
     <meta charset="utf-8" />
-    <link 
-    rel="preload" 
-    href="https://static.wuliya.cn/static/font/NotoColorEmoji-Regular.ttf" 
-    as="font" 
-    type="font/woff"
+    <link
+      rel="preload"
+      href="https://static.wuliya.cn/static/font/NotoColorEmoji-Regular.ttf"
+      as="font"
+      type="font/woff"
     />
     <link
       href="{{_res_path}}/common/css/git-light.css"
       rel="stylesheet"
       type="text/css"
     />
-    <link 
-    rel="preload" 
-    href="https://static.wuliya.cn/static/font/HELVETI.woff" 
-    as="font" 
-    type="font/woff" 
+    <link
+      rel="preload"
+      href="https://static.wuliya.cn/static/font/HELVETI.woff"
+      as="font"
+      type="font/woff"
     />
     <meta name="viewport" content="width=device-width" />
-    {{block 'css'}} {{/block}}
-    {{block 'scripts'}} {{/block}}
+    {{block 'css'}} {{/block}} {{block 'scripts'}} {{/block}}
   </head>
 
   <body>
-    <div class="application-main">
-      <div>
-        <main>{{block 'main'}}{{/block}}</main>
-      </div>
+    <div class="container" id="container">
+      {{block 'main'}}{{/block}}
     </div>
   </body>
 </html>

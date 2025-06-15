@@ -1,4 +1,6 @@
 import Client, { create_state_id } from '@candriajs/git-neko-kit'
+import MarkdownIt from 'markdown-it'
+import { full as emoji } from 'markdown-it-emoji'
 import { redis } from 'node-karin'
 
 import { Config } from '@/common'
@@ -48,24 +50,42 @@ export async function get_user (stateId: string): Promise<{ botId: string, userI
 export async function get_client () {
   try {
     if (
-      !(Config.github.PrivateKey ||
-      Config.github.ClientID ||
-      Config.github.ClientSecret ||
-      Config.github.WebhookSecret)
+      (!(Config.github.PrivateKey &&
+        Config.github.ClientID &&
+        Config.github.ClientSecret) &&
+        !Config.github.access_token)
     ) {
       throw new Error('喵呜~ , 请检查 Github 配置')
     }
-    const options = {
-      github: {
-        Client_ID: Config.github.ClientID,
-        Client_Secret: Config.github.ClientSecret,
-        Private_Key: Config.github.PrivateKey,
-        WebHook_Secret: Config.github.WebhookSecret,
-        format: true
-      }
+    const options: { github: Record<string, any> } = { github: {} }
+    if (Config.github.access_token) {
+      options.github.access_token = Config.github.access_token
+    } else if (
+      Config.github.PrivateKey &&
+      Config.github.ClientID &&
+      Config.github.ClientSecret
+    ) {
+      options.github.Private_Key = Config.github.PrivateKey
+      options.github.Client_ID = Config.github.ClientID
+      options.github.Client_Secret = Config.github.ClientSecret
     }
+    if (Config.github.WebhookSecret) {
+      options.github.WebHook_Secret = Config.github.WebhookSecret
+    }
+    options.github.format = true
     return Promise.resolve(new Client(options))
   } catch {
     throw new Error('喵呜~, 请检查 客户端 配置')
   }
+}
+
+/**
+ * 获取一个markdowm渲染器
+ * @param markdownm 要渲染的Markdown内容
+ * @returns
+ */
+export async function get_md_render (): Promise<MarkdownIt> {
+  const md = new MarkdownIt({ html: true })
+  md.use(emoji)
+  return Promise.resolve(md)
 }

@@ -6,7 +6,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const auth_install = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(GitHub)(Auth|授权)(安装|install)$/i,
+  /^#?(?:柠糖码猫)?(GitHub)(Auth|授权)(安装|install)$/i,
   async (e: Message) => {
     try {
       if (e.isGroup) {
@@ -33,7 +33,7 @@ export const auth_install = karin.command(
   })
 
 export const auth_check = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(GitHub)(Auth|授权)(检查|check)$/i,
+  /^#?(?:柠糖码猫)?(GitHub)(Auth|授权)(检查|check)$/i,
   async (e: Message) => {
     try {
       const botId = e.selfId
@@ -43,7 +43,7 @@ export const auth_check = karin.command(
       if (!access_token) throw new Error('喵呜~ 请先进行应用安装然后进行授权安装')
       const auth = await gh.get_auth()
       const check = await auth.check_token_status({ access_token })
-      let msg = check.data.info
+      let msg = check.data.message
       await e.reply(msg, { reply: true })
       return true
     } catch (error) {
@@ -86,7 +86,7 @@ export const auth_refresh = karin.command(
           refresh_token: refresh_token ?? null,
           refresh_token_expires_in: refresh_token_expires_in ?? null
         })
-        msg = req.data.info
+        msg = req.data.message
       } else if (refresh_token_expires_in === null) {
         msg = '喵呜, 访问令牌无过期有效期, 无需刷新'
       } else {

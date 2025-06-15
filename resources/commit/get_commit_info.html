@@ -49,9 +49,6 @@
         <div class="repo-info">
           <div class="repo-name">
             {{commit.owner}}/{{commit.repo}}
-            <span class="repo-visibility {{commit.visibility === 'private' ? 'private' : 'public'}}">
-              {{commit.visibility === 'private' ? '私有' : '公开'}}
-            </span>
           </div>
           <div class="branch-info">
             <div class="branch-icon">
@@ -65,12 +62,25 @@
         </div>
       </div>
 
-      <div class="author-info">
-        <div class="author-avatar">
-          <img src="{{ commit.author_avatar }}" alt="Author Avatar" />
-        </div>
-        <span>{{ commit.author_name }}</span>
-        <span class="time-info">•&nbsp;提交于&ensp;{{ commit.commit_date }} </span>
+      <div class="avatar-info">
+        {{if commit.author_name === commit.committer_name}}
+          <div class="author-avatar">
+            <img src="{{ commit.author_avatar }}" alt="Author Avatar" />
+          </div>
+          <span>由 {{ commit.author_name }} 提交</span>
+          <span class="time-info"> • {{ commit.commit_date }}</span>
+        {{else}}
+          <div class="avatar-group">
+            <div class="author-avatar">
+              <img src="{{ commit.author_avatar }}" alt="Author Avatar" title="作者"/>
+            </div>
+            <div class="committer-avatar">
+              <img src="{{ commit.committer_avatar }}" alt="Committer Avatar" title="提交者"/>
+            </div>
+          </div>
+          <span>由 {{ commit.author_name }} 编写，并由 {{ commit.committer_name }} 提交</span>
+          <span class="time-info"> • {{ commit.commit_date }}</span>
+        {{/if}}
       </div>
 
       <div class="commit-message">
@@ -93,7 +103,9 @@
         </div>
         <div class="commit-divider"></div>
         {{if commit.commit_body}}
-        <div class="commit-content">{{@commit.commit_body}}</div>
+        <div class="commit-content">
+          {{@commit.commit_body}}
+        </div>
         {{/if}}
       </div>
     </div>

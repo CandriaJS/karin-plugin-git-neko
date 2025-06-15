@@ -51,7 +51,9 @@ type="text/css"
     </div>
 
     <div class="info-label">仓库描述：</div>
+    {{ if description }}
     <div class="info-value">{{ description }}</div>
+    {{/if}}
   </div>
 
   <div class="separator"></div>

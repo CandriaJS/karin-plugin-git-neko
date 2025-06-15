@@ -27,7 +27,7 @@ app.use((req, res, next) => {
   })
   next()
 })
-
+app.use(express.json())
 app.engine('html', artTemplate)
 app.set('view engine', 'html')
 app.set('views', `${Version.Plugin_Path}/resources`)

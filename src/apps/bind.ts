@@ -21,7 +21,7 @@ export const bind_user = karin.command(/^#?(?:(?:柠糖)?码猫插件|karin-plug
       refresh_token: user_info?.refresh_token ?? null,
       refresh_token_expires_in: user_info?.refresh_token_expires_in ?? null
     })
-    await e.reply(`喵呜~ 绑定用户${username}成功`)
+    await e.reply(`喵呜~ 绑定用户 ${username} 成功`)
     return true
   } catch (error) {
     /** 一般来说不会发生，但是为了安全起见，还是加上 */
@@ -36,7 +36,7 @@ export const bind_user = karin.command(/^#?(?:(?:柠糖)?码猫插件|karin-plug
   permission: 'all'
 })
 
-export const bind_repo = karin.command(/^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?GitHub(?:仓库|repo)(?:绑定|bind)\s*([\w-]+)[\/\s]+([\w-]+)$/i, async (e: Message) => {
+export const bind_repo = karin.command(/^#?(?:柠糖码猫)?GitHub(?:仓库|repo)(?:绑定|bind)\s*([\w-]+)[\/\s]+([\w-]+)$/i, async (e: Message) => {
   try {
     const [, owner, repo] = e.msg.match(bind_repo.reg)!
     if (!e.isGroup) {

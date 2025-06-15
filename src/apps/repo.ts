@@ -1,4 +1,4 @@
-import { get_langage_color } from '@candriajs/git-neko-kit'
+import { CollaboratorPermissionType, get_langage_color } from '@candriajs/git-neko-kit'
 import karin, { Elements, logger, Message, segment, TextElement } from 'node-karin'
 
 import { Render } from '@/common'
@@ -7,7 +7,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const get_repo_info = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?(?:GitHub)(?:仓库|repo)(?:信息|info)(?:\s*([\w-]+)[\/\s]+([\w-]+))?$/i,
+  /^#?(?:柠糖码猫)?(?:GitHub)(?:仓库|repo)(?:信息|info)(?:\s*([\w-]+)[\/\s]+([\w-]+))?$/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')
@@ -67,7 +67,7 @@ export const get_repo_info = karin.command(
   })
 
 export const get_org_repos_list = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?GitHub(?:组织|org)(?:仓库|repo)(?:列表|list)\s*(.+)/i,
+  /^#?(?:柠糖码猫)?GitHub(?:组织|org)(?:仓库|repo)(?:列表|list)\s*(.+)/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_org_repos_list.reg)
@@ -82,6 +82,7 @@ export const get_org_repos_list = karin.command(
       const org_repos_list = await repo.get_org_repos_list({ org })
       const repo_list = org_repos_list.data.map(repo => ({
         name: repo.name,
+        description: repo.description,
         visibility: repo.visibility,
         archived: repo.archived,
         language: repo.language ?? '未知',
@@ -110,7 +111,7 @@ export const get_org_repos_list = karin.command(
   })
 
 export const get_user_repos_list = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?GitHub(?:用户|org)(?:仓库|repo)(?:列表|list)\s*(.+)?/i,
+  /^#?(?:柠糖码猫)?GitHub(?:用户|org)(?:仓库|repo)(?:列表|list)\s*(.+)?/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_user_repos_list.reg)
@@ -140,6 +141,7 @@ export const get_user_repos_list = karin.command(
       }
       repo_list = repo_list.data.map(repo => ({
         name: repo.name,
+        description: repo.description,
         visibility: repo.visibility,
         archived: repo.archived,
         language: repo.language ?? '未知',
@@ -168,8 +170,9 @@ export const get_user_repos_list = karin.command(
     event: 'message',
     permission: 'all'
   })
+
 export const add_collaborator = karin.command(
-  /^#?(?:(?:柠糖)?码猫插件|karin-plugin-git-neko)?GitHub(?:仓库|repo)(?:邀请|invite|add|添加)(?:\s*([\w-]+))?(?:[\/\s]+([\w-]+))?(?:\s*([\w-]+))?(?:\s*([\w-]+))?/i,
+  /^#?(?:柠糖码猫)?GitHub?(?:仓库|repo)(?:邀请|invite|add|添加)(?:\s*([\w-]+))?(?:[\/\s]+([\w-]+))?(?:\s*([\w-]+))?(?:\s*([\w-]+))?/i,
   async (e: Message) => {
     if (!e.isGroup) {
       return await e.reply('喵呜~, 请在群聊中使用此命令')
@@ -251,7 +254,7 @@ export const add_collaborator = karin.command(
       }
       permission = permission ?? 'pull'
       const repo_obj = await gh.get_repo()
-      const collaborator_info = await repo_obj.add_collaborator({ owner, repo, username, permission })
+      const collaborator_info = await repo_obj.add_collaborator({ owner, repo, username, permission: permission as CollaboratorPermissionType })
       const user = await gh.get_user()
       const user_info = await user.get_user_info({ username })
       const nickname = user_info.data.name ?? '未知'

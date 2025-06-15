@@ -7,7 +7,7 @@ import { Version } from '@/root'
 const gh = await github.get_github()
 
 export const get_user_info = karin.command(
-  /^#?(?:(?:柠糖码猫)|karin-plugin-git-neko)?GitHub(?:用户|user)(?:信息|info)\s*(.+)?/i,
+  /^#?(?:柠糖码猫)?GitHub(?:用户|user)(?:信息|info)\s*(.+)?/i,
   async (e: Message) => {
     try {
       const match = e.msg.match(get_user_info.reg)
@@ -17,7 +17,6 @@ export const get_user_info = karin.command(
       const userId = e.userId
       const userInfo = await utils.get_user_info(botId, userId)
       const access_token = userInfo?.access_token
-      if (access_token) gh.setToken(access_token)
       const user = await gh.get_user()
       let user_info
       if (!username) {

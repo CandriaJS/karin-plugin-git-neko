@@ -1,45 +1,47 @@
 import { get_relative_time } from '@candriajs/git-neko-kit'
-import bodyParser from 'body-parser'
 import type { Request, Response, Router } from 'express'
-import MarkdownIt from 'markdown-it'
-import { ImageElement, logger } from 'node-karin'
+import { common, HTTPStatusCode, logger, segment, SendElement } from 'node-karin'
 import express from 'node-karin/express'
 
-import { Render } from '@/common'
-import { github, utils } from '@/models'
+import { Config, Render } from '@/common'
+import { base, github, utils } from '@/models'
 
 const gh = await github.get_github()
 
 const WebHookRouter: Router = express.Router()
 
-WebHookRouter.use(bodyParser.json())
-
 WebHookRouter.post('/', async (req: Request, res: Response) => {
   try {
-    const signature = req.headers['x-hub-signature-256'] as string
-    if (!signature) {
-      return res.status(403).json({
-        code: 401,
-        message: '鉴权失败: 缺少signature'
-      }) as unknown as void
+    if (Config.github.WebhookSecret) {
+      const signature = req.headers['x-hub-signature-256'] as string
+      if (!signature) {
+        return res.status(HTTPStatusCode.NotFound).json({
+          code: HTTPStatusCode.NotFound,
+          message: '鉴权失败: 缺少signature'
+        }) as unknown as void
+      }
+      const webhook = await gh.get_webhook()
+      /** 验证签名 */
+      const isValid = await webhook.check_webhook_signature({
+        signature,
+        payload: JSON.stringify(req.body)
+      })
+      if (!isValid.data.success) {
+        logger.warn('喵呜~, 签名验证失败')
+        return res.status(HTTPStatusCode.Unauthorized).json({
+          code: HTTPStatusCode.Unauthorized,
+          message: '鉴权失败: 签名验证失败'
+        }) as unknown as void
+      } else {
+        logger.debug('喵呜~, 签名验证成功')
+      }
     }
     const event = req.headers['x-github-event'] as string
     if (event === 'installation' || event === 'github_app_authorization') {
       return logger.warn('喵呜~, Github App 事件, 跳过推送')
     }
-    const webhook = await gh.get_webhook()
 
-    /** 验证签名 */
-    const isValid = await webhook.check_webhook_signature({
-      signature,
-      payload: JSON.stringify(req.body)
-    })
-    if (!isValid.data.success) {
-      return logger.warn('喵呜~, 签名验证失败')
-    } else {
-      logger.debug('喵呜~, 签名验证成功')
-    }
-
+    const action = req.body.action
     const repository = req.body.repository
     const full_name = repository.full_name
     const visibility = repository.visibility
@@ -55,6 +57,13 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
     if (!webhooks.some(webhook => webhook.event.includes(event))) {
       return logger.warn(`喵呜~, 没有找到匹配 ${event} 事件的订阅, 跳过推送`)
     }
+
+    await Promise.all(webhooks.map(async (webhook) => {
+      await common.sleep(500)
+      return utils.send_msg('group', String(webhook.botId), String(webhook.groupId), [
+        segment.text(`用户 ${req.body.sender.login} 触发了仓库 ${full_name} 事件 ${action ? `${event}/${action}` : event}`)
+      ])
+    }))
 
     let branch: string
     if (event === 'push') {
@@ -78,7 +87,7 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
       gh.setToken(token)
     }))
 
-    let img: ImageElement[]
+    let sendMsg: Array<SendElement>
     switch (event) {
       case 'push':
       {
@@ -87,10 +96,9 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         const commit = await gh.get_commit()
         const commit_info = await commit.get_commit_info({ owner, repo, sha })
         const commit_date = await get_relative_time((commit_info.data.commit.committer).date)
-        const md = new MarkdownIt({ html: true })
-        const commit_title = md.render(commit_info.data.commit.title as string)
-        const commit_body = md.render(commit_info.data.commit.body ?? '')
-        img = await Render.render(
+        const commit_title = base.render_markdown(commit_info.data.commit.title ?? '')
+        const commit_body = base.render_markdown(commit_info.data.commit.body ?? '')
+        sendMsg = await Render.render(
           'commit/get_commit_info',
           {
             platform,
@@ -123,10 +131,10 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         logger.warn(`喵呜~, 不支持的事件类型: ${event}`)
         return
     }
-    /** 未来会扩展为可以私聊发送， 或许(bushi) */
-    await Promise.all(webhooks.map(webhook =>
-      utils.send_msg('group', String(webhook.botId), String(webhook.groupId), img)
-    ))
+    await Promise.all(webhooks.map(async (webhook) => {
+      await common.sleep(500)
+      return utils.send_msg('group', String(webhook.botId), String(webhook.groupId), sendMsg)
+    }))
   } catch (error) {
     logger.error(error)
   }

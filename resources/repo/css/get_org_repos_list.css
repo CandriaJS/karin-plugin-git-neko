@@ -1,12 +1,16 @@
+body { 
+  min-width: 800px;
+  max-width: 1200px;
+}
+
 .card {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  max-width: 780px;
+  min-width: 800px;
   width: 90%;
   padding: 50px;
   margin: 20px auto;
-  transition: transform 0.3s ease;
 }
 .card .header {
   display: flex;
@@ -28,6 +32,10 @@
   color: rgb(34, 34, 34);
 }
 
+.repo-count {
+  text-align: center;
+}
+
 .repo-list {
   margin-top: 30px;
   text-align: center;
@@ -37,9 +45,18 @@
   padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255);
   display: block;
-  width: 100%;
   text-align: left;
+  width: 100%;
   font-size: 22px;
+}
+
+.repo-card {
+  width: 90%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  margin: 15px 0; 
 }
 
 .repo-name {
@@ -49,6 +66,21 @@
   display: inline-block;
   margin-bottom: 5px;
 }
+
+.repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repo-description {
+  display: block;
+  font-size: 18px;
+  color: #555;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 .repo-visibility {
   display: inline-flex;
   align-items: center; 
