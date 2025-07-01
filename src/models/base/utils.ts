@@ -1,15 +1,5 @@
 import axios from '@candriajs/git-neko-kit/axios'
 
-import { get_md_render } from '@/models/base/common'
-
-/**
- * 渲染markdown
- * @param  markdown markdown文本
- * @returns  渲染后的HTML文本
- */
-export async function render_markdown (markdown: string): Promise<string> {
-  return (await get_md_render()).render(markdown)
-}
 /**
  * 获取远程ip地址
  * @returns {Promise<string>} 远程IP

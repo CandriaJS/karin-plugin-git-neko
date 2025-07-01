@@ -1,3 +1,5 @@
+import { ProxyProtocol, ProxyType } from '@candriajs/git-neko-kit'
+
 import { Config } from '@/common'
 import { base } from '@/models'
 
@@ -14,13 +16,13 @@ export async function get_github (token?: string | null) {
     if (Config.proxy) {
       const { common, http, https, socks } = Config.proxy
       if (common) {
-        gh.setProxy({ type: 'common', address: common })
+        gh.setProxy({ type: ProxyType.Common, address: common })
       } else if (http) {
-        gh.setProxy({ type: 'http', address: http })
+        gh.setProxy({ type: ProxyProtocol.HTTP, address: http })
       } else if (https) {
-        gh.setProxy({ type: 'https', address: https })
+        gh.setProxy({ type: ProxyProtocol.HTTPS, address: https })
       } else if (socks) {
-        gh.setProxy({ type: 'socks', address: socks })
+        gh.setProxy({ type: ProxyProtocol.SOCKS, address: socks })
       }
     }
     if (token) gh.setToken(token)

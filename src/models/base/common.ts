@@ -1,6 +1,4 @@
 import Client, { create_state_id } from '@candriajs/git-neko-kit'
-import MarkdownIt from 'markdown-it'
-import { full as emoji } from 'markdown-it-emoji'
 import { redis } from 'node-karin'
 
 import { Config } from '@/common'
@@ -8,8 +6,9 @@ import { Version } from '@/root'
 
 /**
  * 获取用户的状态标识符
- * @param {object} e - 事件对象，包含用户的 userId 属性
- * @returns {Promise<string>} 生成的状态标识符
+ * @param botId 机器人ID
+ * @param userId 用户ID
+ * @returns 生成的状态标识符
  */
 export async function get_stateId (botId: string, userId: string) {
   const redis_key_prefix = `karin:${Version.Plugin_Name}:github`
@@ -77,15 +76,4 @@ export async function get_client () {
   } catch {
     throw new Error('喵呜~, 请检查 客户端 配置')
   }
-}
-
-/**
- * 获取一个markdowm渲染器
- * @param markdownm 要渲染的Markdown内容
- * @returns
- */
-export async function get_md_render (): Promise<MarkdownIt> {
-  const md = new MarkdownIt({ html: true })
-  md.use(emoji)
-  return Promise.resolve(md)
 }

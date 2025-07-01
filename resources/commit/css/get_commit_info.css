@@ -1,13 +1,13 @@
 body {
   min-width: 800px;
-  max-width: 1200px; 
+  width: auto; 
 }
 
 .card {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  width: 90%;
+  width: auto;
   padding: 40px;
   margin: 0 auto;
   transition: transform 0.3s ease;
@@ -163,8 +163,7 @@ body {
 .commit-title > span:first-child {
   flex: 1 1 auto;
   min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
+  width: auto;
   text-overflow: ellipsis;
   padding-right: 15px;
 }

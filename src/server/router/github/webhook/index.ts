@@ -1,10 +1,10 @@
-import { get_relative_time } from '@candriajs/git-neko-kit'
+import { get_relative_time, render_markdown } from '@candriajs/git-neko-kit'
 import type { Request, Response, Router } from 'express'
 import { common, HTTPStatusCode, logger, segment, SendElement } from 'node-karin'
 import express from 'node-karin/express'
 
 import { Config, Render } from '@/common'
-import { base, github, utils } from '@/models'
+import { github, utils } from '@/models'
 
 const gh = await github.get_github()
 
@@ -37,7 +37,11 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
       }
     }
     const event = req.headers['x-github-event'] as string
-    if (event === 'installation' || event === 'github_app_authorization') {
+    const ignoreEvents = [
+      'installation',
+      'github_app_authorization'
+    ]
+    if (ignoreEvents.includes(event)) {
       return logger.warn('喵呜~, Github App 事件, 跳过推送')
     }
 
@@ -95,9 +99,6 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         const sha = req.body.head_commit.id.slice(0, 7)
         const commit = await gh.get_commit()
         const commit_info = await commit.get_commit_info({ owner, repo, sha })
-        const commit_date = await get_relative_time((commit_info.data.commit.committer).date)
-        const commit_title = base.render_markdown(commit_info.data.commit.title ?? '')
-        const commit_body = base.render_markdown(commit_info.data.commit.body ?? '')
         sendMsg = await Render.render(
           'commit/get_commit_info',
           {
@@ -109,12 +110,13 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
                 repo,
                 branch,
                 sha,
-                visibility,
-                author_avatar: commit_info.data.commit.author ? commit_info.data.commit.author.avatar_url : null,
-                author_name: commit_info.data.commit.author ? commit_info.data.commit.author.login : null,
-                commit_date,
-                commit_title,
-                commit_body,
+                author_avatar: commit_info.data.commit.author.avatar_url,
+                author_name: commit_info.data.commit.author.login,
+                committer_avatar: commit_info.data.commit.committer.avatar_url,
+                committer_name: commit_info.data.commit.committer.login,
+                commit_date: await get_relative_time(commit_info.data.commit.committer.date),
+                commit_title: await render_markdown(commit_info.data.commit.title ?? ''),
+                commit_body: await render_markdown(commit_info.data.commit.body ?? ''),
                 commit_additions: commit_info.data.stats.additions,
                 commit_deletions: commit_info.data.stats.deletions,
                 commit_files_total: commit_info.data.files.length
@@ -124,8 +126,25 @@ WebHookRouter.post('/', async (req: Request, res: Response) => {
         )
         break
       }
-      case 'pull_request':
-        logger.warn(`喵呜~, 暂不支持 ${event} 事件`)
+      case 'issues':
+        {
+          const issue_info = req.body.issue
+          sendMsg = await Render.render(
+            'issue/get_issue_info',
+            {
+              platform,
+              owner,
+              repo,
+              author_name: issue_info.user?.login,
+              author_avatar: issue_info.user?.avatar_url,
+              issue_number: issue_info.number,
+              issue_state: issue_info.state,
+              issue_title: await render_markdown(issue_info.title),
+              issue_body: await render_markdown(issue_info.body ?? ''),
+              issue_created_at: await get_relative_time(issue_info.created_at)
+            }
+          )
+        }
         break
       default:
         logger.warn(`喵呜~, 不支持的事件类型: ${event}`)

@@ -1,4 +1,4 @@
-import { get_relative_time } from '@candriajs/git-neko-kit'
+import { get_relative_time, render_markdown } from '@candriajs/git-neko-kit'
 import karin, { logger, Message } from 'node-karin'
 
 import { Render } from '@/common'
@@ -45,8 +45,8 @@ export const get_issue_info = karin.command(
           author_avatar: issue_info.data.user?.avatar_url,
           issue_number,
           issue_state: issue_info.data.state,
-          issue_title: await base.render_markdown(issue_info.data.title),
-          issue_body: await base.render_markdown(issue_info.data.body ?? ''),
+          issue_title: await render_markdown(issue_info.data.title),
+          issue_body: await render_markdown(issue_info.data.body ?? ''),
           issue_created_at: await get_relative_time(issue_info.data.created_at)
         }
       )

@@ -1,4 +1,4 @@
-import { get_relative_time } from '@candriajs/git-neko-kit'
+import { get_relative_time, render_markdown } from '@candriajs/git-neko-kit'
 import karin, { logger, Message } from 'node-karin'
 
 import { Render } from '@/common'
@@ -60,8 +60,8 @@ export const get_commit_info = karin.command(
               committer_avatar: commit_info.data.commit.committer.avatar_url,
               committer_name: commit_info.data.commit.committer.login,
               commit_date: await get_relative_time(commit_info.data.commit.committer.date),
-              commit_title: await base.render_markdown(commit_info.data.commit.title ?? ''),
-              commit_body: await base.render_markdown(commit_info.data.commit.body ?? ''),
+              commit_title: await render_markdown(commit_info.data.commit.title ?? ''),
+              commit_body: await render_markdown(commit_info.data.commit.body ?? ''),
               commit_additions: commit_info.data.stats.additions,
               commit_deletions: commit_info.data.stats.deletions,
               commit_files_total: commit_info.data.files.length

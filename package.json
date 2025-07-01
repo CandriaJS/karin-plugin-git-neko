@@ -38,7 +38,7 @@
     "watch": "cross-env EBV_FILE=\"development.env\" tsx watch --include \"src/**/*.ts\" src/app.ts"
   },
   "dependencies": {
-    "@candriajs/git-neko-kit": "^0.8.6",
+    "@candriajs/git-neko-kit": "https://pkg.pr.new/CandriaJS/git-neko-kit/@candriajs/git-neko-kit@fd19135",
     "body-parser": "^2.2.0",
     "express-art-template": "^1.0.1",
     "markdown-it": "^14.1.0",
