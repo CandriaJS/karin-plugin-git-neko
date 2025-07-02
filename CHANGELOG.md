@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.2.0](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.2...v0.2.0) (2025-07-02)
+
+
+### ✨ 新功能
+
+* **repo:** 添加获取引用消息文本的功能以邀请协作者 ([2c6cdf1](https://github.com/CandriaJS/karin-plugin-git-neko/commit/2c6cdf115677feb8cc5b70376c262fae7d82e1fe))
+* **server:** 支持 issues 事件并优化 webhook 处理逻辑 ([1df2d8d](https://github.com/CandriaJS/karin-plugin-git-neko/commit/1df2d8d3fec798db830cd18e90eb254405498125))
+
+
+### 🐛 错误修复
+
+* **commit:** 优化匹配 GitHub commit 信息命令并添加 emoji 支持 ([f4ead58](https://github.com/CandriaJS/karin-plugin-git-neko/commit/f4ead58207210880cdfe5181f26be365f3e0fc8e))
+* help ([21d77a9](https://github.com/CandriaJS/karin-plugin-git-neko/commit/21d77a98200420801991ad53e37295edac7d65db))
+* update ([3255f3a](https://github.com/CandriaJS/karin-plugin-git-neko/commit/3255f3a862e8f239fd87c1d92435a0e353244fa6))
+
+
+### ♻️ 代码重构
+
+* **apps/repo:** 优化添加协作者功能的逻辑 ([8a3b3f3](https://github.com/CandriaJS/karin-plugin-git-neko/commit/8a3b3f3523fab65a7fc026a23605880069b13b75))
+* **layout:** 重构页面布局和样式 ([f6ac0e9](https://github.com/CandriaJS/karin-plugin-git-neko/commit/f6ac0e9507d631c03a1d451d8a9b19f2a4b5dfbe))
+* **repo:** 优化仓库信息展示和查询逻辑 ([a33bed2](https://github.com/CandriaJS/karin-plugin-git-neko/commit/a33bed21565ccd702ed6a374303e064041702247))
+* **repo:** 优化仓库信息展示和查询逻辑 ([5444e89](https://github.com/CandriaJS/karin-plugin-git-neko/commit/5444e898307350771fcf8312f960752378143ac3))
+
+
+### 🎡 持续集成
+
+* 更新 bug 报告模板 ([e114486](https://github.com/CandriaJS/karin-plugin-git-neko/commit/e114486638d3eaf4b7813a84dcdd001632671b4f))
+
 ## [0.1.2](https://github.com/CandriaJS/karin-plugin-git-neko/compare/v0.1.1...v0.1.2) (2025-05-27)
 
 
